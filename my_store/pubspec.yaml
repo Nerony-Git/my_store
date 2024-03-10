@@ -46,7 +46,7 @@ flutter:
   assets:
     - assets/fonts/
     - assets/icons/
-    - assets/img/
+    - assets/img/onboarding/
     - assets/logos/ 
 
   # ----- Local Assets Folders End ----- #  
