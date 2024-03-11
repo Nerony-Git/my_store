@@ -1,4 +1,6 @@
 import 'package:flutter/material.dart';
+import 'package:my_store/utils/constants/sizes.dart';
+import 'package:my_store/utils/helpers/helper_functions.dart';
 
 class SignupScreen extends StatelessWidget {
   const SignupScreen({super.key});
@@ -9,7 +11,7 @@ class SignupScreen extends StatelessWidget {
 
     return Scaffold(
       appBar: AppBar(),
-      body SingleChildScrollView(
+      body: SingleChildScrollView(
         child: Padding(
           padding: const EdgeInsets.all(MySizes.defaultSpace),
           child: Column(
