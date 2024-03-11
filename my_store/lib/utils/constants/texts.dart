@@ -1,4 +1,12 @@
 class MyText {
+  // -- GLOBAL Texts
+  static const String and = "and";
+  static const String skip = "Skip";
+  static const String done = "Done";
+  static const String submit = "Submit";
+  static const String appName = "My_Store";
+  static const String tContinue = "Continue";
+
   // -- OnBoarding Texts
   static const String onBoardingTitle1 = "Choose your product";
   static const String onBoardingTitle2 = "Select Payment Method";
