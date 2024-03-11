@@ -14,4 +14,18 @@ class MyImages {
   // -- Social Logos
   static const String google = "assets/icons/google.png";
   static const String facebook = "assets/icons/facebook.png";
+
+  // -- Illustrations
+  static const String productsIllustration =
+      "assets/img/illustration/sammy-line-workout.gif";
+  static const String productsSaleIllustration =
+      "assets/img/illustration/sammy-line-sale.png";
+  static const String staticSuccessIllustration =
+      "assets/img/illustration/sammy-line-success.png";
+  static const String deliveredInPlaneIllustration =
+      "assets/img/illustration/sammy-line-come-back-later.png";
+  static const String deliveredEmailIllustration =
+      "assets/img/illustration/sammy-line-man-receives-a-mail.png";
+  static const String verifyIllustration =
+      "assets/img/illustration/sammy-line-travel-backpack-with-passport-and-air-ticket.gif";
 }
