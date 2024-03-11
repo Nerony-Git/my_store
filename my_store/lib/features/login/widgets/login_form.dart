@@ -20,7 +20,7 @@ class LoginForm extends StatelessWidget {
             /// Email
             TextFormField(
               decoration: const InputDecoration(
-                prefixIcon: Icon(Iconsax.direct_right),
+                prefixIcon: Icon(Iconsax.direct),
                 labelText: MyText.email,
               ),
             ),
