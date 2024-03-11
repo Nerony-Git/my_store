@@ -80,7 +80,7 @@ class LoginForm extends StatelessWidget {
             SizedBox(
               width: double.infinity,
               child: ElevatedButton(
-                onPressed: () {},
+                onPressed: () => Get.to(() => const SignupScreen()),
                 child: const Text(MyText.createAccount),
               ),
             ),
