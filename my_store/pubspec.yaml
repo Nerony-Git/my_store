@@ -15,6 +15,7 @@ dependencies:
   
   # Icons Packages
   cupertino_icons: ^1.0.2
+  iconsax: ^0.0.8
 
   # Utility Packages
   http: ^1.2.0
