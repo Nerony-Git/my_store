@@ -1,8 +1,8 @@
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
-import 'package:my_store/features/login/styles/login_padding.dart';
 import 'package:my_store/features/login/widgets/login_form.dart';
 import 'package:my_store/features/login/widgets/login_header.dart';
+import 'package:my_store/global/styles/padding_styles.dart';
 import 'package:my_store/global/widgets/form_divider.dart';
 import 'package:my_store/global/widgets/social_footer.dart';
 import 'package:my_store/utils/constants/sizes.dart';
@@ -16,7 +16,7 @@ class LoginScreen extends StatelessWidget {
     return Scaffold(
       body: SingleChildScrollView(
         child: Padding(
-          padding: LoginPadding.paddingWithAppBarHeight,
+          padding: PaddingStyle.paddingWithAppBarHeight,
           child: Column(
             children: [
               /// Logo. Title and Sub Title
