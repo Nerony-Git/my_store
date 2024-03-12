@@ -1,6 +1,11 @@
 import 'package:flutter/material.dart';
 import 'package:my_store/features/home/widgets/header_container.dart';
 import 'package:my_store/features/home/widgets/home_app_bar.dart';
+import 'package:my_store/features/home/widgets/home_categories.dart';
+import 'package:my_store/global/widgets/search_bar.dart';
+import 'package:my_store/global/widgets/section_heading.dart';
+import 'package:my_store/utils/constants/colors.dart';
+import 'package:my_store/utils/constants/sizes.dart';
 
 class HomeScreen extends StatelessWidget {
   const HomeScreen({super.key});
@@ -17,6 +22,36 @@ class HomeScreen extends StatelessWidget {
                 children: [
                   /// Home App Bar
                   HomeAppBar(),
+                  SizedBox(
+                    height: MySizes.spaceBtwSections,
+                  ),
+
+                  /// Search bar
+                  SearchBarContainer(text: 'Search in Store'),
+                  SizedBox(
+                    height: MySizes.spaceBtwSections,
+                  ),
+
+                  /// Categories Section
+                  Padding(
+                    padding: EdgeInsets.only(left: MySizes.defaultSpace),
+                    child: Column(
+                      children: [
+                        /// Heading
+                        SectionHeading(
+                          title: 'Popular Categories',
+                          showActionButton: false,
+                          textColor: MyColors.white,
+                        ),
+                        SizedBox(
+                          height: MySizes.spaceBtwItems,
+                        ),
+
+                        /// Categories
+                        HomeCategories(),
+                      ],
+                    ),
+                  ),
                 ],
               ),
             ),
