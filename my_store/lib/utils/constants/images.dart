@@ -47,4 +47,17 @@ class MyImages {
       "assets/icons/categories/icons8-sparkling-diamond-64.png";
   static const String electronicsIcon =
       "assets/icons/categories/icons8-smartphone-64.png";
+
+  //Banners
+  static const String promoBanner1 = "assets/img/banners/promo-banner-1.png";
+  static const String promoBanner2 = "assets/img/banners/promo-banner-2.png";
+  static const String promoBanner3 = "assets/img/banners/promo-banner-3.png";
+  static const String banner1 = "assets/img/banners/banner_1.jpg";
+  static const String banner2 = "assets/img/banners/banner_2.jpg";
+  static const String banner3 = "assets/img/banners/banner_3.jpg";
+  static const String banner4 = "assets/img/banners/banner_4.jpg";
+  static const String banner5 = "assets/img/banners/banner_5.jpg";
+  static const String banner6 = "assets/img/banners/banner_6.jpg";
+  static const String banner7 = "assets/img/banners/banner_7.jpg";
+  static const String banner8 = "assets/img/banners/banner_8.jpg";
 }
