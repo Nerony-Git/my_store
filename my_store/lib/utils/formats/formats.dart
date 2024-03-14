@@ -10,7 +10,7 @@ class MyFormats {
   }
 
   static String formatCurrency(double amount) {
-    return NumberFormat.currency(locale: 'en_GB', symbol: '\£')
+    return NumberFormat.currency(locale: 'en_GB', symbol: '£')
         .format(amount); // Customize the currency locale and symbol as needed
   }
 
