@@ -48,7 +48,7 @@ class MyImages {
   static const String electronicsIcon =
       "assets/icons/categories/icons8-smartphone-64.png";
 
-  //Banners
+  // -- Banners
   static const String promoBanner1 = "assets/img/banners/promo-banner-1.png";
   static const String promoBanner2 = "assets/img/banners/promo-banner-2.png";
   static const String promoBanner3 = "assets/img/banners/promo-banner-3.png";
@@ -187,4 +187,8 @@ class MyImages {
       "assets/img/products/slipper-product-3.png";
   static const String productImage77 =
       "assets/img/products/slipper-product.png";
+  
+
+  // -- Profile
+  static const String user = "assets/img/users/user.png";
 }
