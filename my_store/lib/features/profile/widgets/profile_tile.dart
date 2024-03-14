@@ -6,8 +6,10 @@ import 'package:my_store/utils/constants/images.dart';
 
 class ProfileTile extends StatelessWidget {
   const ProfileTile({
-    super.key,
+    super.key, required this.onPressed,
   });
+
+  final VoidCallback onPressed;
 
   @override
   Widget build(BuildContext context) {
@@ -15,7 +17,7 @@ class ProfileTile extends StatelessWidget {
       leading: const RoundImage(img: MyImages.user, width: 50, height: 50, padding: 0,),
       title: Text('Nerony Tech', style: Theme.of(context).textTheme.headlineSmall!.apply(color: MyColors.white),),
       subtitle: Text('neronytech@gmail.com', style: Theme.of(context).textTheme.bodyMedium!.apply(color: MyColors.white),),
-      trailing: IconButton(onPressed: () {}, icon: const Icon(Iconsax.edit, color: MyColors.white,)),
+      trailing: IconButton(onPressed: onPressed, icon: const Icon(Iconsax.edit, color: MyColors.white,)),
     );
   }
 }
