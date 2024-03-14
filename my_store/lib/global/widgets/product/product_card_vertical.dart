@@ -3,9 +3,10 @@ import 'package:iconsax/iconsax.dart';
 import 'package:my_store/global/styles/shadow_styles.dart';
 import 'package:my_store/global/widgets/containers/rounded_container.dart';
 import 'package:my_store/global/widgets/icons/rounded_icon.dart';
+import 'package:my_store/global/widgets/product/brand_title_with_icon.dart';
 import 'package:my_store/global/widgets/product/product_price.dart';
 import 'package:my_store/global/widgets/product/product_title.dart';
-import 'package:my_store/global/widgets/rounded_image.dart';
+import 'package:my_store/global/widgets/imgs/rounded_image.dart';
 import 'package:my_store/utils/constants/colors.dart';
 import 'package:my_store/utils/constants/images.dart';
 import 'package:my_store/utils/constants/sizes.dart';
@@ -78,36 +79,21 @@ class ProductCardVertical extends StatelessWidget {
             ),
 
             /// Product details
-            Padding(
-              padding: const EdgeInsets.only(left: MySizes.sm),
+            const Padding(
+              padding: EdgeInsets.only(left: MySizes.sm),
               child: Column(
                 crossAxisAlignment: CrossAxisAlignment.start,
                 children: [
                   /// Title
-                  const ProductTitle(
+                  ProductTitle(
                     title: 'Green Nike Air Shoes',
                     smallSize: true,
                   ),
-                  const SizedBox(
+                  SizedBox(
                     height: MySizes.spaceBtwItems / 2,
                   ),
-                  Row(
-                    children: [
-                      Text(
-                        'Nike',
-                        overflow: TextOverflow.ellipsis,
-                        maxLines: 1,
-                        style: Theme.of(context).textTheme.labelMedium,
-                      ),
-                      const SizedBox(
-                        width: MySizes.xs,
-                      ),
-                      const Icon(
-                        Iconsax.verify5,
-                        color: MyColors.primary,
-                        size: MySizes.iconXs,
-                      ),
-                    ],
+                  BrandTitleWithIcon(
+                    title: 'Nike',
                   ),
                 ],
               ),
