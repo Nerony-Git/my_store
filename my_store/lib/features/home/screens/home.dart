@@ -3,6 +3,8 @@ import 'package:my_store/features/home/widgets/header_container.dart';
 import 'package:my_store/features/home/widgets/home_app_bar.dart';
 import 'package:my_store/features/home/widgets/home_categories.dart';
 import 'package:my_store/features/home/widgets/promotion_slider.dart';
+import 'package:my_store/global/widgets/layouts/grid_layout.dart';
+import 'package:my_store/global/widgets/product/product_card_vertical.dart';
 import 'package:my_store/global/widgets/search_bar.dart';
 import 'package:my_store/global/widgets/section_heading.dart';
 import 'package:my_store/utils/constants/colors.dart';
@@ -14,12 +16,12 @@ class HomeScreen extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return const Scaffold(
+    return Scaffold(
       body: SingleChildScrollView(
         child: Column(
           children: [
             /// Home screen header
-            HeaderContainer(
+            const HeaderContainer(
               child: Column(
                 children: [
                   /// Home App Bar
@@ -60,12 +62,34 @@ class HomeScreen extends StatelessWidget {
 
             /// Body
             Padding(
-              padding: EdgeInsets.all(MySizes.defaultSpace),
-              child: PromotionSlider(
-                banners: [
-                  MyImages.promoBanner1,
-                  MyImages.promoBanner2,
-                  MyImages.promoBanner3,
+              padding: const EdgeInsets.all(MySizes.defaultSpace),
+              child: Column(
+                children: [
+                  /// Promotion Slider Section
+                  const PromotionSlider(
+                    banners: [
+                      MyImages.promoBanner1,
+                      MyImages.promoBanner2,
+                      MyImages.promoBanner3,
+                    ],
+                  ),
+                  const SizedBox(
+                    height: MySizes.spaceBtwSections,
+                  ),
+
+                  /// Popular Products Section
+                  SectionHeading(
+                    title: 'Popular Products',
+                    onPressed: () {},
+                  ),
+                  const SizedBox(
+                    height: MySizes.spaceBtwItems,
+                  ),
+
+                  GridLayout(
+                    itemCount: 4,
+                    itemBuilder: (_, index) => const ProductCardVertical(),
+                  ),
                 ],
               ),
             ),
