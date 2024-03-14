@@ -1,6 +1,8 @@
 import 'package:flutter/material.dart';
+import 'package:get/get.dart';
 import 'package:iconsax/iconsax.dart';
 import 'package:my_store/features/home/widgets/header_container.dart';
+import 'package:my_store/features/profile/screens/profile.dart';
 import 'package:my_store/features/profile/widgets/profile_tile.dart';
 import 'package:my_store/features/profile/widgets/settings_menu_tile.dart';
 import 'package:my_store/global/widgets/custom_app_bar.dart';
@@ -28,7 +30,7 @@ class SettingsScreen extends StatelessWidget {
                   const SizedBox(height: MySizes.spaceBtwSections,),
 
                   /// Profile
-                  const ProfileTile(),
+                  ProfileTile(onPressed: () => Get.to(() => const ProfileScreen())),
                   const SizedBox(height: MySizes.spaceBtwSections,),
                 ],
               ),
