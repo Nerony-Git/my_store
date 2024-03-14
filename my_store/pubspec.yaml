@@ -53,6 +53,7 @@ flutter:
     - assets/img/illustration/
     - assets/img/banners/
     - assets/img/products/
+    - assets/img/users/
     - assets/logos/ 
 
   # ----- Local Assets Folders End ----- #  
