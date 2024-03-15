@@ -2,7 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:my_store/features/store/widgets/brand_card.dart';
 import 'package:my_store/features/store/widgets/category_tab.dart';
 import 'package:my_store/global/widgets/appbars/custom_tab_bar.dart';
-import 'package:my_store/global/widgets/counter_icon.dart';
+import 'package:my_store/features/store/widgets/cart_icon.dart';
 import 'package:my_store/global/widgets/custom_app_bar.dart';
 import 'package:my_store/global/widgets/layouts/grid_layout.dart';
 import 'package:my_store/global/widgets/search_bar.dart';
@@ -24,7 +24,7 @@ class StoreScreen extends StatelessWidget {
             'Store',
             style: Theme.of(context).textTheme.headlineMedium,
           ),
-          actions: [CounterIcon(iconColor: MyColors.white, onPressed: () {})],
+          actions: [CartIcon(iconColor: MyColors.white, onPressed: () {})],
         ),
         body: NestedScrollView(
           headerSliverBuilder: (_, innerBoxIsScrolled) {
