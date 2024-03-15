@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:iconsax/iconsax.dart';
 import 'package:my_store/features/home/widgets/header_container.dart';
+import 'package:my_store/features/profile/screens/address.dart';
 import 'package:my_store/features/profile/screens/profile.dart';
 import 'package:my_store/features/profile/widgets/profile_tile.dart';
 import 'package:my_store/features/profile/widgets/settings_menu_tile.dart';
@@ -45,7 +46,7 @@ class SettingsScreen extends StatelessWidget {
                   const SectionHeading(title: 'Account Settings', showActionButton: false,),
                   const SizedBox(height: MySizes.spaceBtwItems,),
 
-                  SettingsMenuTile(icon: Iconsax.safe_home, title: 'My Address', subtitle: 'Set shopping delivery address.', onTap: () {},),
+                  SettingsMenuTile(icon: Iconsax.safe_home, title: 'My Address', subtitle: 'Set shopping delivery address.', onTap: () => Get.to(() => const AddressScreen()),),
                   SettingsMenuTile(icon: Iconsax.shopping_cart, title: 'My Cart', subtitle: 'Add, remove products and move to checkout.', onTap: () {},),
                   SettingsMenuTile(icon: Iconsax.bag_tick, title: 'My Orders', subtitle: 'In-progress and completed orders.', onTap: () {},),
                   SettingsMenuTile(icon: Iconsax.bank, title: 'Bank Account', subtitle: 'Withdraw balance to registered bank account.', onTap: () {},),
