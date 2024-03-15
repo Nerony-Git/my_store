@@ -55,7 +55,7 @@ class ProductMetaData extends StatelessWidget {
               width: MySizes.spaceBtwItems,
             ),
             const ProductPrice(
-              price: '175',
+              price: '280',
               isLarge: true,
             ),
           ],
@@ -83,6 +83,8 @@ class ProductMetaData extends StatelessWidget {
             ),
           ],
         ),
+
+        /// Brand
         Row(
           children: [
             RoundImage(
@@ -100,8 +102,9 @@ class ProductMetaData extends StatelessWidget {
             ),
           ],
         ),
-
-        /// Brand
+        const SizedBox(
+          height: MySizes.spaceBtwItems,
+        ),
       ],
     );
   }
