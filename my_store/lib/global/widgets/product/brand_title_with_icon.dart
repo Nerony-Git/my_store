@@ -14,6 +14,7 @@ class BrandTitleWithIcon extends StatelessWidget {
     this.iconColor = MyColors.primary,
     this.textAlign = TextAlign.center,
     this.brandTextSize = TextSizes.small,
+    this.mainAxisSize = true,
   });
 
   final String title;
@@ -21,11 +22,12 @@ class BrandTitleWithIcon extends StatelessWidget {
   final Color? textColor, iconColor;
   final TextAlign? textAlign;
   final TextSizes brandTextSize;
+  final bool mainAxisSize;
 
   @override
   Widget build(BuildContext context) {
     return Row(
-      mainAxisSize: MainAxisSize.min,
+      mainAxisSize: mainAxisSize ? MainAxisSize.min : MainAxisSize.max,
       children: [
         Flexible(
           child: BrandTitle(
