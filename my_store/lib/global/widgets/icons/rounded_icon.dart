@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:my_store/utils/constants/colors.dart';
 import 'package:my_store/utils/constants/sizes.dart';
+import 'package:my_store/utils/helpers/helper_functions.dart';
 
 class RoundedIcon extends StatelessWidget {
   const RoundedIcon({
@@ -21,17 +22,21 @@ class RoundedIcon extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    final dark = HelperFunctions.isDarkMode(context);
+
     return Container(
       width: width,
       height: height,
       decoration: BoxDecoration(
         borderRadius: BorderRadius.circular(100),
         color: backgroundColor != null
-            ? MyColors.black.withOpacity(0.9)
-            : MyColors.white.withOpacity(0.9),
+            ? backgroundColor!
+            : dark
+                ? MyColors.black.withOpacity(0.9)
+                : MyColors.white.withOpacity(0.9),
       ),
       child: IconButton(
-        onPressed: () {},
+        onPressed: onPressed,
         icon: Icon(
           icon,
           color: color,
