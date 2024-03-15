@@ -1,5 +1,7 @@
 import 'package:flutter/material.dart';
+import 'package:get/get.dart';
 import 'package:iconsax/iconsax.dart';
+import 'package:my_store/features/product/screens/product_detail.dart';
 import 'package:my_store/global/styles/shadow_styles.dart';
 import 'package:my_store/global/widgets/containers/rounded_container.dart';
 import 'package:my_store/global/widgets/icons/rounded_icon.dart';
@@ -20,10 +22,9 @@ class ProductCardVertical extends StatelessWidget {
     final dark = HelperFunctions.isDarkMode(context);
 
     return GestureDetector(
-      onTap: () {},
+      onTap: () => Get.to(() => const ProductDetailScreen()),
       child: Container(
         width: 180,
-        padding: const EdgeInsets.all(1),
         decoration: BoxDecoration(
           boxShadow: [ShadowStyle.verticalProductShadow],
           borderRadius: BorderRadius.circular(MySizes.productImageRadius),
@@ -94,6 +95,7 @@ class ProductCardVertical extends StatelessWidget {
                   ),
                   BrandTitleWithIcon(
                     title: 'Nike',
+                    mainAxisSize: false,
                   ),
                 ],
               ),
