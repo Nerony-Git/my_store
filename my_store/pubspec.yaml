@@ -30,6 +30,9 @@ dependencies:
   get: ^4.6.6
   get_storage: ^2.1.1
 
+  # Product Specific
+  readmore: ^2.2.0
+
 # ----- Packages End ----- #
 
 
