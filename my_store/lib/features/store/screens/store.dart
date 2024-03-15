@@ -16,7 +16,6 @@ class StoreScreen extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-
     return DefaultTabController(
       length: 5,
       child: Scaffold(
@@ -57,7 +56,7 @@ class StoreScreen extends StatelessWidget {
                       const SizedBox(
                         height: MySizes.spaceBtwSections,
                       ),
-      
+
                       /// Featured brands
                       SectionHeading(
                         title: 'Featured Brands',
@@ -66,22 +65,22 @@ class StoreScreen extends StatelessWidget {
                       const SizedBox(
                         height: MySizes.spaceBtwItems / 1.5,
                       ),
-      
+
                       GridLayout(
                         itemCount: 4,
                         mainAxisExtent: 80,
                         itemBuilder: (_, index) {
-                          return const BrandCard(showBorder: false,);
+                          return const BrandCard();
                         },
                       ),
                     ],
                   ),
                 ),
-      
+
                 // Tabs Section
                 bottom: const CustomTabBar(
                   tabs: [
-                    Tab(child: Text('Sportts')),
+                    Tab(child: Text('Sports')),
                     Tab(child: Text('Furniture')),
                     Tab(child: Text('Electronics')),
                     Tab(child: Text('Clothes')),
@@ -93,11 +92,13 @@ class StoreScreen extends StatelessWidget {
           },
 
           /// Body
-          body: const TabBarView(
-            children: [
-              CategoryTab(), CategoryTab(), CategoryTab(), CategoryTab(), CategoryTab(),
-            ]
-          ),
+          body: const TabBarView(children: [
+            CategoryTab(),
+            CategoryTab(),
+            CategoryTab(),
+            CategoryTab(),
+            CategoryTab(),
+          ]),
         ),
       ),
     );
