@@ -70,6 +70,8 @@ class DefaultFirebaseOptions {
     messagingSenderId: '826973291462',
     projectId: 'ecommerceapp-c967c',
     storageBucket: 'ecommerceapp-c967c.appspot.com',
+    androidClientId: '826973291462-55ts2bqber8e4f404olu0frdte43ce5q.apps.googleusercontent.com',
+    iosClientId: '826973291462-2emnpho325mb5pspmfppqut7g4283tqg.apps.googleusercontent.com',
     iosBundleId: 'com.example.myStore',
   );
 }
