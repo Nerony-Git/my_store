@@ -9,7 +9,7 @@ class MyTextTheme {
     headlineMedium: const TextStyle().copyWith(
         fontSize: 24.0, fontWeight: FontWeight.w600, color: Colors.black),
     headlineSmall: const TextStyle().copyWith(
-        fontSize: 10.0, fontWeight: FontWeight.w600, color: Colors.black),
+        fontSize: 18.0, fontWeight: FontWeight.w600, color: Colors.black),
     titleLarge: const TextStyle().copyWith(
         fontSize: 16.0, fontWeight: FontWeight.w600, color: Colors.black),
     titleMedium: const TextStyle().copyWith(
@@ -38,7 +38,7 @@ class MyTextTheme {
     headlineMedium: const TextStyle().copyWith(
         fontSize: 24.0, fontWeight: FontWeight.w600, color: Colors.white),
     headlineSmall: const TextStyle().copyWith(
-        fontSize: 10.0, fontWeight: FontWeight.w600, color: Colors.white),
+        fontSize: 18.0, fontWeight: FontWeight.w600, color: Colors.white),
     titleLarge: const TextStyle().copyWith(
         fontSize: 16.0, fontWeight: FontWeight.w600, color: Colors.white),
     titleMedium: const TextStyle().copyWith(
