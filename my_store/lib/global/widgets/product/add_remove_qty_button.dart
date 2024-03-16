@@ -13,7 +13,7 @@ class AddRemoveQtyButton extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     final dark = HelperFunctions.isDarkMode(context);
-    
+
     return Row(
       mainAxisSize: MainAxisSize.min,
       children: [
@@ -22,14 +22,21 @@ class AddRemoveQtyButton extends StatelessWidget {
           width: 32,
           height: 32,
           size: MySizes.md,
-          color:  dark ? MyColors.white : MyColors.black,
+          color: dark ? MyColors.white : MyColors.black,
           backgroundColor: dark ? MyColors.darkerGrey : MyColors.light,
         ),
-        const SizedBox(width: MySizes.spaceBtwItems,),
-        Text('2', style: Theme.of(context).textTheme.titleSmall,),
-        const SizedBox(width: MySizes.spaceBtwItems,),
+        const SizedBox(
+          width: MySizes.spaceBtwItems,
+        ),
+        Text(
+          '2',
+          style: Theme.of(context).textTheme.titleSmall,
+        ),
+        const SizedBox(
+          width: MySizes.spaceBtwItems,
+        ),
         const RoundedIcon(
-          icon: Iconsax.minus,
+          icon: Iconsax.add,
           width: 32,
           height: 32,
           size: MySizes.md,
