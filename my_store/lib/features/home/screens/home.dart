@@ -85,7 +85,7 @@ class HomeScreen extends StatelessWidget {
                   /// Popular Products Section
                   SectionHeading(
                     title: 'Popular Products',
-                    onPressed: () => Get.to(() => const AllProducts()),
+                    onPressed: () => Get.to(() => const AllProductsScreen()),
                   ),
                   const SizedBox(
                     height: MySizes.spaceBtwItems,
