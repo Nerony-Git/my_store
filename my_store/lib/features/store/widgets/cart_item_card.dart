@@ -26,8 +26,10 @@ class CartItemCard extends StatelessWidget {
           padding: MySizes.sm,
           backgroundColor: dark ? MyColors.darkerGrey : MyColors.light,
         ),
-        const SizedBox(width: MySizes.spaceBtwItems,),
-    
+        const SizedBox(
+          width: MySizes.spaceBtwItems,
+        ),
+
         /// Title, price and size
         Expanded(
           child: Column(
@@ -35,15 +37,32 @@ class CartItemCard extends StatelessWidget {
             crossAxisAlignment: CrossAxisAlignment.start,
             children: [
               const BrandTitleWithIcon(title: 'Nike'),
-              const Flexible(child: ProductTitle(title: 'Green Nike Air Shoes', maxLines: 1,)),
+              const Flexible(
+                  child: ProductTitle(
+                title: 'Green Nike Air Shoes',
+                maxLines: 1,
+              )),
+
               /// Attributes
               Text.rich(
                 TextSpan(
                   children: [
-                    TextSpan(text: 'Color', style: Theme.of(context).textTheme.bodySmall),
-                    TextSpan(text: 'Green', style: Theme.of(context).textTheme.bodyLarge),
-                    TextSpan(text: 'Size', style: Theme.of(context).textTheme.bodySmall),
-                    TextSpan(text: 'UK 10.5', style: Theme.of(context).textTheme.bodyLarge),
+                    TextSpan(
+                      text: 'Color: ',
+                      style: Theme.of(context).textTheme.bodySmall,
+                    ),
+                    TextSpan(
+                      text: 'Green    ',
+                      style: Theme.of(context).textTheme.bodyLarge,
+                    ),
+                    TextSpan(
+                      text: 'Size: ',
+                      style: Theme.of(context).textTheme.bodySmall,
+                    ),
+                    TextSpan(
+                      text: 'UK 10.5',
+                      style: Theme.of(context).textTheme.bodyLarge,
+                    ),
                   ],
                 ),
               ),
