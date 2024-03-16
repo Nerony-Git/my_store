@@ -1,4 +1,6 @@
 import 'package:flutter/material.dart';
+import 'package:get/get.dart';
+import 'package:my_store/features/store/screens/sub_category.dart';
 import 'package:my_store/global/widgets/vertical_categories.dart';
 import 'package:my_store/utils/constants/images.dart';
 
@@ -19,7 +21,7 @@ class HomeCategories extends StatelessWidget {
           return VerticalCategories(
             img: MyImages.clothIcon,
             title: 'Cloth',
-            onTap: () {},
+            onTap: () => Get.to(() => const SubCategoryScreen()),
           );
         },
       ),
