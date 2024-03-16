@@ -1,4 +1,6 @@
 import 'package:flutter/material.dart';
+import 'package:get/get.dart';
+import 'package:my_store/features/store/screens/brand.dart';
 import 'package:my_store/global/widgets/containers/rounded_container.dart';
 import 'package:my_store/global/widgets/imgs/round_image.dart';
 import 'package:my_store/global/widgets/product/brand_title_with_icon.dart';
@@ -10,7 +12,9 @@ import 'package:my_store/utils/helpers/helper_functions.dart';
 
 class BrandCard extends StatelessWidget {
   const BrandCard({
-    super.key, this.showBorder = true, this.onTap,
+    super.key,
+    this.showBorder = true,
+    this.onTap,
   });
 
   final bool showBorder;
@@ -19,9 +23,9 @@ class BrandCard extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     final dark = HelperFunctions.isDarkMode(context);
-    
+
     return GestureDetector(
-      onTap: () {},
+      onTap: () => Get.to(() => const BrandScreen()),
       child: RoundedContainer(
         padding: const EdgeInsets.all(MySizes.sm),
         showBorder: showBorder,
@@ -34,20 +38,18 @@ class BrandCard extends StatelessWidget {
                 isNetworkImage: false,
                 img: MyImages.clothIcon,
                 backgroundColor: Colors.transparent,
-                overlayColor:
-                    dark ? MyColors.white : MyColors.black,
+                overlayColor: dark ? MyColors.white : MyColors.black,
               ),
             ),
             const SizedBox(
               width: MySizes.spaceBtwItems / 2,
             ),
-    
+
             /// Text
             Expanded(
               child: Column(
                 mainAxisSize: MainAxisSize.min,
-                crossAxisAlignment:
-                    CrossAxisAlignment.start,
+                crossAxisAlignment: CrossAxisAlignment.start,
                 children: [
                   const BrandTitleWithIcon(
                     title: 'Nike',
@@ -56,9 +58,7 @@ class BrandCard extends StatelessWidget {
                   Text(
                     '349 products with ',
                     overflow: TextOverflow.ellipsis,
-                    style: Theme.of(context)
-                        .textTheme
-                        .labelMedium,
+                    style: Theme.of(context).textTheme.labelMedium,
                   ),
                 ],
               ),
