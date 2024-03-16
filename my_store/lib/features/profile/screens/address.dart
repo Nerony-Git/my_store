@@ -17,12 +17,20 @@ class AddressScreen extends StatelessWidget {
       floatingActionButton: FloatingActionButton(
         backgroundColor: MyColors.primary,
         onPressed: () => Get.to(() => const NewAddressScreen()),
-        child: const Icon(Iconsax.add, color: MyColors.white,),
+        child: const Icon(
+          Iconsax.add,
+          color: MyColors.white,
+        ),
       ),
 
       /// Appbar
-      appBar: CustomAppBar(title: Text('Addresses', style: Theme.of(context).textTheme.headlineSmall,), showBackArrow: true,),
-      
+      appBar: const CustomAppBar(
+        title: Text(
+          'Addresses',
+        ),
+        showBackArrow: true,
+      ),
+
       /// Body
       body: const SingleChildScrollView(
         child: Padding(
