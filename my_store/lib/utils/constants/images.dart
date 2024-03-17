@@ -210,4 +210,36 @@ class MyImages {
   static const String paytm = "assets/icons/payment_methods/paytm.png";
   static const String successfulPaymentIcon =
       "assets/icons/payment_methods/successful_payment_icon.png";
+
+  // -- Lottie animations
+  static const String cartAnimation =
+      "assets/img/animations/lady-adding-product-in-cart-animation.json";
+  static const String orderCompletedAnimation =
+      "assets/img/animations/order-complete-car-delivery-animation.json";
+  static const String packageAnimation =
+      "assets/img/animations/packaging-in-progress.json";
+  static const String paperPlaneAnimation =
+      "assets/img/animations/paper-plane.json";
+  static const String carAnimation =
+      "assets/img/animations/animation-lottie-car-rides.json";
+  static const String pencilAnimation =
+      "assets/img/animations/pencil-drawing.json";
+  static const String docerAnimation =
+      "assets/img/animations/animation-of-docer.json";
+  static const String searchAnimation = "assets/img/animations/searching.json";
+  static const String emptyAnimation = "assets/img/animations/empty-file.json";
+  static const String securityAnimation =
+      "assets/img/animations/security-icon-transparent.json";
+  static const String successfullyRegisterAnimation =
+      "assets/img/animations/check-register.json";
+  static const String thankYouAnimation =
+      "assets/img/animations/thank-you.json";
+  static const String paymentSuccessfulAnimation =
+      "assets/img/animations/payment-successful.json";
+  static const String loadingJuggleAnimation =
+      "assets/img/animations/loading-juggle.json";
+  static const String cloudUploadingAnimation =
+      "assets/img/animations/cloud-uploading-animation.json";
+  static const String loaderAnimation =
+      "assets/img/animations/loader-animation.json";
 }
