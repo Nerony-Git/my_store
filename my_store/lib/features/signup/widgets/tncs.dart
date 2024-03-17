@@ -1,4 +1,6 @@
 import 'package:flutter/material.dart';
+import 'package:get/get.dart';
+import 'package:my_store/features/signup/controllers/signup_controller.dart';
 import 'package:my_store/utils/constants/colors.dart';
 import 'package:my_store/utils/constants/sizes.dart';
 import 'package:my_store/utils/constants/texts.dart';
@@ -11,15 +13,20 @@ class TNCs extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    final controller = SignUpController.instance;
     final dark = HelperFunctions.isDarkMode(context);
+
     return Row(
       children: [
         SizedBox(
           width: 24,
           height: 24,
-          child: Checkbox(
-            value: true,
-            onChanged: (value) {},
+          child: Obx(
+            () => Checkbox(
+              value: controller.privacyPolicy.value,
+              onChanged: (value) => controller.privacyPolicy.value =
+                  !controller.privacyPolicy.value,
+            ),
           ),
         ),
         const SizedBox(width: MySizes.spaceBtwItems),
