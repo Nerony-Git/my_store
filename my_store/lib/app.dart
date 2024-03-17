@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
-import 'package:my_store/features/onboarding/screens/onboarding.dart';
+import 'package:my_store/bindings/general_bindings.dart';
+import 'package:my_store/utils/constants/colors.dart';
 import 'package:my_store/utils/theme/theme.dart';
 
 class App extends StatelessWidget {
@@ -12,7 +13,15 @@ class App extends StatelessWidget {
       themeMode: ThemeMode.system,
       theme: MyAppTheme.lightTheme,
       darkTheme: MyAppTheme.darkTheme,
-      home: const OnBoardingScreen(),
+      initialBinding: GeneralBindings(),
+      home: const Scaffold(
+        backgroundColor: MyColors.primary,
+        body: Center(
+          child: CircularProgressIndicator(
+            color: Colors.white,
+          ),
+        ),
+      ),
     );
   }
 }
