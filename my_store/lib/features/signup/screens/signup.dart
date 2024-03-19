@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:my_store/features/signup/widgets/signup_form.dart';
+import 'package:my_store/global/widgets/custom_app_bar.dart';
 import 'package:my_store/global/widgets/form_divider.dart';
 import 'package:my_store/global/widgets/social_footer.dart';
 import 'package:my_store/utils/constants/sizes.dart';
@@ -12,7 +13,9 @@ class SignupScreen extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      appBar: AppBar(),
+      appBar: const CustomAppBar(
+        showBackArrow: true,
+      ),
       body: SingleChildScrollView(
         child: Padding(
           padding: const EdgeInsets.all(MySizes.defaultSpace),
