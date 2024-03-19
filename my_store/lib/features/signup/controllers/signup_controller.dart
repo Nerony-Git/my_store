@@ -39,7 +39,6 @@ class SignUpController extends GetxController {
         FullScreenLoader.stopLoading();
         return;
       }
-      ;
 
       /// Form validation
       if (!signupFormKey.currentState!.validate()) {
@@ -55,13 +54,19 @@ class SignUpController extends GetxController {
             title: 'Accept Privacy Policy',
             message:
                 'In order to create an account, you must have to read and accept the Privacy Policy and Terms of Use.');
+
+        /// Remove loader
+        FullScreenLoader.stopLoading();
+
         return;
       }
 
       /// Register user in the Firebase authentication and save user data in the database
-      final userCredential = await AuthenticationRepository.instance
-          .registerWithEmailAndPassword(
-              email.text.trim(), password.text.trim());
+      final userCredential =
+          await AuthenticationRepository.instance.registerWithEmailAndPassword(
+        email.text.trim(),
+        password.text.trim(),
+      );
 
       /// Save authenticated user data in the Firebase Firestore
       final newUser = UserModel(
