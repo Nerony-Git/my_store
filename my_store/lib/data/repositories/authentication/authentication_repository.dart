@@ -3,6 +3,7 @@ import 'package:flutter/services.dart';
 import 'package:flutter_native_splash/flutter_native_splash.dart';
 import 'package:get/get.dart';
 import 'package:get_storage/get_storage.dart';
+import 'package:google_sign_in/google_sign_in.dart';
 import 'package:my_store/features/email/screens/verify_email.dart';
 import 'package:my_store/features/login/screens/login.dart';
 import 'package:my_store/features/navigation/widgets/navigation_menu.dart';
@@ -124,6 +125,35 @@ class AuthenticationRepository extends GetxController {
   /* ----- Federated identity and social sign-in start ----- */
 
   /// [GoogleAuthentication] - Google
+  Future<UserCredential?> signInWithGoogle() async {
+    try {
+      /// Trigger authentication flow
+      final GoogleSignInAccount? userAccount = await GoogleSignIn().signIn();
+
+      /// Obtain the authentication details from the request
+      final GoogleSignInAuthentication? googleAuth =
+          await userAccount?.authentication;
+
+      /// Create a new credential
+      final credentials = GoogleAuthProvider.credential(
+        accessToken: googleAuth?.accessToken,
+        idToken: googleAuth?.idToken,
+      );
+
+      /// Once signed in, return user credential
+      return await _auth.signInWithCredential(credentials);
+    } on FirebaseAuthException catch (e) {
+      throw CustomFirebaseAuthException(e.code).message;
+    } on FirebaseException catch (e) {
+      throw CustomFirebaseException(e.code).message;
+    } on FormatException catch (_) {
+      throw const CustomFormatException();
+    } on PlatformException catch (e) {
+      throw CustomPlatformException(e.code).message;
+    } catch (e) {
+      throw 'Something went wrong. Please try again!';
+    }
+  }
 
   /// [FacebookAuthentication] - Facebook
 
