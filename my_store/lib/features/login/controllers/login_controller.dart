@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:get_storage/get_storage.dart';
 import 'package:my_store/data/repositories/authentication/authentication_repository.dart';
+import 'package:my_store/features/profile/controllers/user_controller.dart';
 import 'package:my_store/utils/constants/images.dart';
 import 'package:my_store/utils/helpers/network_manager.dart';
 import 'package:my_store/utils/popups/fullscreen_loader.dart';
@@ -17,6 +18,7 @@ class LoginController extends GetxController {
   final email = TextEditingController();
   final password = TextEditingController();
   GlobalKey<FormState> loginFormKey = GlobalKey<FormState>();
+  final userController = Get.put(UserController());
 
   @override
   void onInit() {
@@ -77,6 +79,39 @@ class LoginController extends GetxController {
 
   /// Google SignIn Authentication
   Future<void> googleSignIn() async {
-    try {} catch (e) {}
+    try {
+      /// Start Loading
+      FullScreenLoader.openLoadingDialog(
+          'Logging you in...', MyImages.docerAnimation);
+
+      /// Check internet connectivity
+      final isConnected = await NetworkManager.instance.isConnected();
+      if (!isConnected) {
+        FullScreenLoader.stopLoading();
+        return;
+      }
+
+      /// Google Authentication
+      final userCredentials = await AuthenticationRepository.instance.signInWithGoogle();
+
+      /// Save user details
+      await userController.saveUserDetails(userCredentials);
+
+      /// Remove loader
+      FullScreenLoader.stopLoading();
+
+      /// Redirect
+      AuthenticationRepository.instance.screenRedirect();
+
+    } catch (e) {
+      /// Remove loader
+      FullScreenLoader.stopLoading();
+
+      /// Show some generic error to the user
+      SnackBars.errorSnackBar(
+        title: 'Oh Snap',
+        message: e.toString(),
+      );
+    }
   }
 }
