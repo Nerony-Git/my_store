@@ -23,7 +23,7 @@ class SocialFooter extends StatelessWidget {
             borderRadius: BorderRadius.circular(100),
           ),
           child: IconButton(
-            onPressed: () =>,
+            onPressed: () => controller.googleSignIn(),
             icon: const Image(
               width: MySizes.iconMd,
               height: MySizes.iconMd,
