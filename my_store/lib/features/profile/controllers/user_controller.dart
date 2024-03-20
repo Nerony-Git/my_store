@@ -7,7 +7,16 @@ import 'package:my_store/utils/popups/loaders.dart';
 class UserController extends GetxController {
   static UserController get instance => Get.find();
 
+  /// Variables
+  final profileLoading = false.obs;
+  Rx<UserModel> user = UserModel.empty().obs;
   final userRepository = Get.put(UserRepository());
+
+  @override
+  void onInit() {
+    super.onInit();
+    fetchUserData();
+  }
 
   /// Save user details from any registration provider
   Future<void> saveUserDetails(UserCredential? userCredentials) async {
@@ -40,6 +49,19 @@ class UserController extends GetxController {
         title: 'Data not saved!', 
         message: 'Something went wrong while saving your information. yyou can re-save your data in your profile.',
       );
+    }
+  }
+
+  /// Fetch user data
+  Future<void> fetchUserData() async {
+    try {
+      profileLoading.value = true;
+      final user = await userRepository.fetchUserData();
+      this.user(user);
+    } catch (e) {
+      user(UserModel.empty());
+    } finally {
+      profileLoading.value = false;
     }
   }
 }
