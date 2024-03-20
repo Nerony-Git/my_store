@@ -8,6 +8,8 @@ import 'package:my_store/utils/popups/fullscreen_loader.dart';
 import 'package:my_store/utils/popups/loaders.dart';
 
 class LoginController extends GetxController {
+  static LoginController get instance => Get.find();
+
   /// Variables
   final rememberMe = false.obs;
   final hidePassword = true.obs;
@@ -24,7 +26,7 @@ class LoginController extends GetxController {
   }
 
   /// Email and password signin
-  Future<void> emailAndPasswordSignIn() async {
+  void emailAndPasswordSignIn() async {
     try {
       /// Start Loading
       FullScreenLoader.openLoadingDialog(
@@ -71,5 +73,10 @@ class LoginController extends GetxController {
         message: e.toString(),
       );
     }
+  }
+
+  /// Google SignIn Authentication
+  Future<void> googleSignIn() async {
+    try {} catch (e) {}
   }
 }
