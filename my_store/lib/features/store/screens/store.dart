@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
+import 'package:my_store/features/store/controllers/category_controller.dart';
 import 'package:my_store/features/store/screens/all_brands.dart';
 import 'package:my_store/features/store/widgets/brand_card.dart';
 import 'package:my_store/features/store/widgets/category_tab.dart';
@@ -18,8 +19,10 @@ class StoreScreen extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    final categories = CategoryController.instance.featuredCategories;
+
     return DefaultTabController(
-      length: 5,
+      length: categories.length,
       child: Scaffold(
         appBar: CustomAppBar(
           title: Text(
@@ -80,27 +83,15 @@ class StoreScreen extends StatelessWidget {
                 ),
 
                 // Tabs Section
-                bottom: const CustomTabBar(
-                  tabs: [
-                    Tab(child: Text('Sports')),
-                    Tab(child: Text('Furniture')),
-                    Tab(child: Text('Electronics')),
-                    Tab(child: Text('Clothes')),
-                    Tab(child: Text('Cosmetics')),
-                  ],
+                bottom: CustomTabBar(
+                  tabs: categories.map((category) => Tab(child: Text(category.name),)).toList(),
                 ),
               ),
             ];
           },
 
           /// Body
-          body: const TabBarView(children: [
-            CategoryTab(),
-            CategoryTab(),
-            CategoryTab(),
-            CategoryTab(),
-            CategoryTab(),
-          ]),
+          body: TabBarView(children: categories.map((category) => CategoryTab(category: category)).toList()),
         ),
       ),
     );
