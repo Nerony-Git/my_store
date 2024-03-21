@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:my_store/global/widgets/imgs/round_image.dart';
 import 'package:my_store/utils/constants/colors.dart';
 import 'package:my_store/utils/constants/sizes.dart';
 import 'package:my_store/utils/helpers/helper_functions.dart';
@@ -10,12 +11,13 @@ class VerticalCategories extends StatelessWidget {
     required this.title,
     this.textColor = MyColors.white,
     this.backgroundColor,
-    this.onTap,
+    this.onTap, this.isNetworkImage = true,
   });
 
   final String img, title;
   final Color textColor;
   final Color? backgroundColor;
+  final bool isNetworkImage;
   final void Function()? onTap;
 
   @override
@@ -29,22 +31,13 @@ class VerticalCategories extends StatelessWidget {
         child: Column(
           children: [
             /// Images
-            Container(
-              width: 56,
-              height: 56,
-              padding: const EdgeInsets.all(MySizes.sm),
-              decoration: BoxDecoration(
-                color:
-                    backgroundColor ?? (dark ? MyColors.black : MyColors.white),
-                borderRadius: BorderRadius.circular(100),
-              ),
-              child: Center(
-                child: Image(
-                  image: AssetImage(img),
-                  fit: BoxFit.cover,
-                  color: dark ? MyColors.light : MyColors.dark,
-                ),
-              ),
+            RoundImage(
+              img: img,
+              fit: BoxFit.fitWidth,
+              padding: MySizes.sm * 1.4,
+              isNetworkImage: isNetworkImage,
+              backgroundColor: backgroundColor,
+              overlayColor: dark ? MyColors.light : MyColors.dark,
             ),
             const SizedBox(
               height: MySizes.spaceBtwItems / 2,
