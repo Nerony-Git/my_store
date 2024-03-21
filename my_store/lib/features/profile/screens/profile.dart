@@ -1,6 +1,8 @@
 import 'package:flutter/material.dart';
+import 'package:get/get.dart';
 import 'package:iconsax/iconsax.dart';
 import 'package:my_store/features/profile/controllers/user_controller.dart';
+import 'package:my_store/features/profile/screens/change_name.dart';
 import 'package:my_store/features/profile/widgets/profile_menu.dart';
 import 'package:my_store/global/widgets/custom_app_bar.dart';
 import 'package:my_store/global/widgets/imgs/round_image.dart';
@@ -60,7 +62,7 @@ class ProfileScreen extends StatelessWidget {
               ),
 
               ProfileMenu(
-                onPressed: () {},
+                onPressed: () => Get.to(() => const ChangeNameScreen()),
                 title: 'Name',
                 value: controller.user.value.fullName,
               ),
