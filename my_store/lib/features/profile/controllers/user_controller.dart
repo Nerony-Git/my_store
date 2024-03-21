@@ -7,6 +7,7 @@ import 'package:my_store/features/login/screens/login.dart';
 import 'package:my_store/features/login/widgets/re_authenticate_user_login.dart';
 import 'package:my_store/utils/constants/images.dart';
 import 'package:my_store/utils/constants/sizes.dart';
+import 'package:my_store/utils/helpers/network_manager.dart';
 import 'package:my_store/utils/models/user_model.dart';
 import 'package:my_store/utils/popups/fullscreen_loader.dart';
 import 'package:my_store/utils/popups/loaders.dart';
@@ -36,30 +37,32 @@ class UserController extends GetxController {
       /// Check is user details is not empty
       if (userCredentials != null) {
         // Convert display name to first name and last name
-        final nameParts = UserModel.nameParts(userCredentials.user!.displayName ?? '');
+        final nameParts =
+            UserModel.nameParts(userCredentials.user!.displayName ?? '');
 
         // Generate username based on diaplay name
-        final username = UserModel.generateUsername(userCredentials.user!.displayName ?? '');
+        final username =
+            UserModel.generateUsername(userCredentials.user!.displayName ?? '');
 
         // Map data to user model
         final user = UserModel(
-          id: userCredentials.user!.uid, 
-          firstName: nameParts[0], 
-          lastName: nameParts.length > 1 ? nameParts.sublist(1).join(' ') : '', 
-          username: username, 
-          email: userCredentials.user!.email ?? '', 
-          phoneNumber: userCredentials.user!.phoneNumber ?? '', 
+          id: userCredentials.user!.uid,
+          firstName: nameParts[0],
+          lastName: nameParts.length > 1 ? nameParts.sublist(1).join(' ') : '',
+          username: username,
+          email: userCredentials.user!.email ?? '',
+          phoneNumber: userCredentials.user!.phoneNumber ?? '',
           profilePicture: userCredentials.user!.photoURL ?? '',
         );
 
         // Save generated user details
         await userRepository.saveUserRecord(user);
-
       }
     } catch (e) {
       SnackBars.warningSnackBar(
-        title: 'Data not saved!', 
-        message: 'Something went wrong while saving your information. yyou can re-save your data in your profile.',
+        title: 'Data not saved!',
+        message:
+            'Something went wrong while saving your information. yyou can re-save your data in your profile.',
       );
     }
   }
@@ -82,25 +85,38 @@ class UserController extends GetxController {
     Get.defaultDialog(
       contentPadding: const EdgeInsets.all(MySizes.md),
       title: 'Delete Account',
-      middleText: 'Are you sure you want to delete your caaount permanently? This action is not reversible and all of your data will be removed permanently.',
+      middleText:
+          'Are you sure you want to delete your account permanently? This action is not reversible and all of your data will be removed permanently.',
       confirm: ElevatedButton(
         onPressed: () async => deleteUserAccount(),
-        style: ElevatedButton.styleFrom(backgroundColor: Colors.red, side: const BorderSide(color: Colors.red),), 
-        child: const Padding(padding: EdgeInsets.symmetric(horizontal: MySizes.lg), child: Text('Delete'),),
+        style: ElevatedButton.styleFrom(
+          backgroundColor: Colors.red,
+          side: const BorderSide(color: Colors.red),
+        ),
+        child: const Padding(
+          padding: EdgeInsets.symmetric(horizontal: MySizes.lg),
+          child: Text('Delete'),
+        ),
       ),
-      cancel: OutlinedButton(onPressed: () => Navigator.of(Get.overlayContext!).pop(), child: const Text('Cancel'),),
+      cancel: OutlinedButton(
+        onPressed: () => Navigator.of(Get.overlayContext!).pop(),
+        child: const Text('Cancel'),
+      ),
     );
   }
 
   /// Delete user account
   void deleteUserAccount() async {
     try {
-      FullScreenLoader.openLoadingDialog('Processing...', MyImages.docerAnimation);
+      FullScreenLoader.openLoadingDialog(
+          'Processing...', MyImages.docerAnimation);
 
       /// Re-authenticate user
       final auth = AuthenticationRepository.instance;
-      final provider = auth.authUser!.providerData.map((e) => e.providerId).first;
+      final provider =
+          auth.authUser!.providerData.map((e) => e.providerId).first;
       if (provider.isNotEmpty) {
+        // Check user login provider
         if (provider == 'google.com') {
           await auth.signInWithGoogle();
           await auth.deleteAccount();
@@ -124,5 +140,39 @@ class UserController extends GetxController {
   }
 
   /// Reauthenticate before deleting
-  Future<void> reAuthenticateEmailAndPasswordUser() async {}
+  Future<void> reAuthenticateEmailAndPasswordUser() async {
+    try {
+      FullScreenLoader.openLoadingDialog(
+          'Processing...', MyImages.docerAnimation);
+
+      /// Check internet connectivity
+      final isConnected = await NetworkManager.instance.isConnected();
+      if (!isConnected) {
+        FullScreenLoader.stopLoading();
+        return;
+      }
+
+      /// Form validation
+      if (!reAuthFormKey.currentState!.validate()) {
+        FullScreenLoader.stopLoading();
+        return;
+      }
+
+      await AuthenticationRepository.instance
+          .reAuthenticateWithEmailAndPassword(
+              verifyEmail.text.trim(), verifyPassword.text.trim());
+      await AuthenticationRepository.instance.deleteAccount();
+      FullScreenLoader.stopLoading();
+      Get.offAll(() => const LoginScreen());
+    } catch (e) {
+      /// Remove loader
+      FullScreenLoader.stopLoading();
+
+      /// Show some generic error to the user
+      SnackBars.errorSnackBar(
+        title: 'Oh Snap',
+        message: e.toString(),
+      );
+    }
+  }
 }
