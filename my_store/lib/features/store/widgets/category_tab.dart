@@ -5,9 +5,12 @@ import 'package:my_store/global/widgets/product/product_card_vertical.dart';
 import 'package:my_store/global/widgets/section_heading.dart';
 import 'package:my_store/utils/constants/images.dart';
 import 'package:my_store/utils/constants/sizes.dart';
+import 'package:my_store/utils/models/category_model.dart';
 
 class CategoryTab extends StatelessWidget {
-  const CategoryTab({super.key});
+  const CategoryTab({super.key, required this.category});
+
+  final CategoryModel category;
 
   @override
   Widget build(BuildContext context) {
