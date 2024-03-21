@@ -1,6 +1,7 @@
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
+import 'package:image_picker/image_picker.dart';
 import 'package:my_store/data/repositories/authentication/authentication_repository.dart';
 import 'package:my_store/data/repositories/user/user_repository.dart';
 import 'package:my_store/features/login/screens/login.dart';
@@ -20,6 +21,7 @@ class UserController extends GetxController {
   Rx<UserModel> user = UserModel.empty().obs;
 
   final hidePassword = false.obs;
+  final imageUploading = false.obs;
   final verifyEmail = TextEditingController();
   final verifyPassword = TextEditingController();
   final userRepository = Get.put(UserRepository());
@@ -34,30 +36,36 @@ class UserController extends GetxController {
   /// Save user details from any registration provider
   Future<void> saveUserDetails(UserCredential? userCredentials) async {
     try {
-      /// Check is user details is not empty
-      if (userCredentials != null) {
-        // Convert display name to first name and last name
-        final nameParts =
-            UserModel.nameParts(userCredentials.user!.displayName ?? '');
+      // First update the Rx user data and check if user dat is already stored.
+      await fetchUserData();
+      // If no data found
+      if (user.value.id.isEmpty) {
+        /// Check is user details is not empty
+        if (userCredentials != null) {
+          // Convert display name to first name and last name
+          final nameParts =
+              UserModel.nameParts(userCredentials.user!.displayName ?? '');
 
-        // Generate username based on diaplay name
-        final username =
-            UserModel.generateUsername(userCredentials.user!.displayName ?? '');
+          // Generate username based on diaplay name
+          final username =
+              UserModel.generateUsername(userCredentials.user!.displayName ?? '');
 
-        // Map data to user model
-        final user = UserModel(
-          id: userCredentials.user!.uid,
-          firstName: nameParts[0],
-          lastName: nameParts.length > 1 ? nameParts.sublist(1).join(' ') : '',
-          username: username,
-          email: userCredentials.user!.email ?? '',
-          phoneNumber: userCredentials.user!.phoneNumber ?? '',
-          profilePicture: userCredentials.user!.photoURL ?? '',
-        );
+          // Map data to user model
+          final user = UserModel(
+            id: userCredentials.user!.uid,
+            firstName: nameParts[0],
+            lastName: nameParts.length > 1 ? nameParts.sublist(1).join(' ') : '',
+            username: username,
+            email: userCredentials.user!.email ?? '',
+            phoneNumber: userCredentials.user!.phoneNumber ?? '',
+            profilePicture: userCredentials.user!.photoURL ?? '',
+          );
 
-        // Save generated user details
-        await userRepository.saveUserRecord(user);
+          // Save generated user details
+          await userRepository.saveUserRecord(user);
+        }
       }
+      
     } catch (e) {
       SnackBars.warningSnackBar(
         title: 'Data not saved!',
@@ -173,6 +181,41 @@ class UserController extends GetxController {
         title: 'Oh Snap',
         message: e.toString(),
       );
+    }
+  }
+
+  /// Uploade user profile image
+  uploadUserProfilePicture() async {
+    try {
+      final img = await ImagePicker().pickImage(source: ImageSource.gallery, imageQuality: 70, maxHeight: 512, maxWidth: 512,);
+      // Check if image is selected
+      if (img != null) {
+        // Upload image
+        imageUploading.value = true;
+        final imageUrl = await userRepository.uploadImage('Users/Images/Profile/', img);
+
+        // Update user image record
+        Map<String, dynamic> json = {'ProfilePicture': imageUrl};
+        await userRepository.updateSingleField(json);
+
+        // Refresh profile picture
+        user.value.profilePicture = imageUrl;
+        user.refresh();
+        // Display success message
+        SnackBars.successSnackBar(title: 'Congratulations', message: 'Your profile picture has been updated!');
+
+      }
+    } catch (e) {
+      /// Remove loader
+      FullScreenLoader.stopLoading();
+
+      /// Show some generic error to the user
+      SnackBars.errorSnackBar(
+        title: 'Oh Snap',
+        message: e.toString(),
+      );
+    } finally {
+      imageUploading.value = false;
     }
   }
 }
