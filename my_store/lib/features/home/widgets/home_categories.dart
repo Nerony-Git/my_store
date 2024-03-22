@@ -15,14 +15,24 @@ class HomeCategories extends StatelessWidget {
     final controller = Get.put(CategoryController());
 
     return Obx(() {
-      // Check if categoreis is loading
+      // Check if categories is loading
       if (controller.isLoading.value) {
         return const CategoryShimmer();
       }
+
       // Check id featured category is empty
       if (controller.featuredCategories.isEmpty) {
-        return Center(child: Text('No Data Found', style: Theme.of(context).textTheme.bodyMedium!.apply(color: Colors.white),),);
+        return Center(
+          child: Text(
+            'No Data Found',
+            style: Theme.of(context)
+                .textTheme
+                .bodyMedium!
+                .apply(color: Colors.white),
+          ),
+        );
       }
+
       return SizedBox(
         height: 80,
         child: ListView.builder(
