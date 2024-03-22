@@ -9,6 +9,7 @@ import 'package:my_store/features/profile/screens/profile.dart';
 import 'package:my_store/features/profile/widgets/profile_tile.dart';
 import 'package:my_store/features/profile/widgets/settings_menu_tile.dart';
 import 'package:my_store/features/store/screens/cart.dart';
+import 'package:my_store/global/screens/upload_data.dart';
 import 'package:my_store/global/widgets/custom_app_bar.dart';
 import 'package:my_store/global/widgets/section_heading.dart';
 import 'package:my_store/utils/constants/colors.dart';
@@ -123,7 +124,7 @@ class SettingsScreen extends StatelessWidget {
                     icon: Iconsax.document_upload,
                     title: 'Load Data',
                     subtitle: 'Upload Data.',
-                    onTap: () {},
+                    onTap: () => Get.to(() => const UploadDataScreen()),
                   ),
                   SettingsMenuTile(
                     icon: Iconsax.location,
