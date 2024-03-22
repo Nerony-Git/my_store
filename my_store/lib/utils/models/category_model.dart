@@ -14,9 +14,14 @@ class CategoryModel {
   });
 
   /// Empty helper function
-  static CategoryModel empty() => CategoryModel(id: '', name: '', img: '', isFeatured: false,);
+  static CategoryModel empty() => CategoryModel(
+        id: '',
+        name: '',
+        img: '',
+        isFeatured: false,
+      );
 
-  /// Convert modet to json structure to store in firebase
+  /// Convert model to json structure to store in firebase
   Map<String, dynamic> toJson() {
     return {
       'Name': name,
@@ -27,19 +32,19 @@ class CategoryModel {
   }
 
   /// Map json oriented document snapshot from firebase to category model
-  factory CategoryModel.fromSnapshot(DocumentSnapshot<Map<String, dynamic>> document) {
+  factory CategoryModel.fromSnapshot(
+      DocumentSnapshot<Map<String, dynamic>> document) {
     if (document.data() != null) {
-      final data = document.data();
+      final data = document.data()!;
 
       // Map json data to the model
       return CategoryModel(
-        id: document.id, 
-        name: data['Name'] ?? '', 
-        img: data['Image'] ?? '', 
+        id: document.id,
+        name: data['Name'] ?? '',
+        img: data['Image'] ?? '',
         parentID: data['ParentID'] ?? '',
         isFeatured: data['IsFeatured'] ?? false,
       );
-      
     } else {
       return CategoryModel.empty();
     }
