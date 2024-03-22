@@ -11,7 +11,8 @@ class VerticalCategories extends StatelessWidget {
     required this.title,
     this.textColor = MyColors.white,
     this.backgroundColor,
-    this.onTap, this.isNetworkImage = true,
+    this.onTap,
+    this.isNetworkImage = true,
   });
 
   final String img, title;
@@ -48,6 +49,7 @@ class VerticalCategories extends StatelessWidget {
               width: 55,
               child: Text(
                 title,
+                textAlign: TextAlign.center,
                 style: Theme.of(context)
                     .textTheme
                     .labelMedium!
