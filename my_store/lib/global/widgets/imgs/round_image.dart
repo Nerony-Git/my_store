@@ -40,14 +40,19 @@ class RoundImage extends StatelessWidget {
       child: ClipRRect(
         borderRadius: BorderRadius.circular(100),
         child: Center(
-          child: isNetworkImage 
+          child: isNetworkImage
               ? CachedNetworkImage(
-                  fit: fit, 
-                  color: overlayColor, 
-                  imageUrl: img, 
-                  progressIndicatorBuilder: (context, url, progress) => const ShimmerEffect(width: 55, height: 55, radius: 55,),
+                  fit: fit,
+                  color: overlayColor,
+                  imageUrl: img,
+                  progressIndicatorBuilder: (context, url, progress) =>
+                      const ShimmerEffect(
+                    width: 55,
+                    height: 55,
+                    radius: 55,
+                  ),
                   errorWidget: (context, url, error) => const Icon(Icons.error),
-                  )
+                )
               : Image(
                   fit: fit,
                   image: AssetImage(img),
