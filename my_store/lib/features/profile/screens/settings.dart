@@ -39,7 +39,7 @@ class SettingsScreen extends StatelessWidget {
                     ),
                   ),
                   const SizedBox(
-                    height: MySizes.spaceBtwSections,
+                    height: MySizes.spaceBtwItems / 2,
                   ),
 
                   /// Profile
@@ -63,7 +63,7 @@ class SettingsScreen extends StatelessWidget {
                     showActionButton: false,
                   ),
                   const SizedBox(
-                    height: MySizes.spaceBtwItems,
+                    height: MySizes.spaceBtwItems / 2,
                   ),
 
                   SettingsMenuTile(
