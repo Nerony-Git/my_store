@@ -47,14 +47,15 @@ class UserController extends GetxController {
               UserModel.nameParts(userCredentials.user!.displayName ?? '');
 
           // Generate username based on diaplay name
-          final username =
-              UserModel.generateUsername(userCredentials.user!.displayName ?? '');
+          final username = UserModel.generateUsername(
+              userCredentials.user!.displayName ?? '');
 
           // Map data to user model
           final user = UserModel(
             id: userCredentials.user!.uid,
             firstName: nameParts[0],
-            lastName: nameParts.length > 1 ? nameParts.sublist(1).join(' ') : '',
+            lastName:
+                nameParts.length > 1 ? nameParts.sublist(1).join(' ') : '',
             username: username,
             email: userCredentials.user!.email ?? '',
             phoneNumber: userCredentials.user!.phoneNumber ?? '',
@@ -65,7 +66,6 @@ class UserController extends GetxController {
           await userRepository.saveUserRecord(user);
         }
       }
-      
     } catch (e) {
       SnackBars.warningSnackBar(
         title: 'Data not saved!',
@@ -187,12 +187,18 @@ class UserController extends GetxController {
   /// Uploade user profile image
   uploadUserProfilePicture() async {
     try {
-      final img = await ImagePicker().pickImage(source: ImageSource.gallery, imageQuality: 70, maxHeight: 512, maxWidth: 512,);
+      final img = await ImagePicker().pickImage(
+        source: ImageSource.gallery,
+        imageQuality: 70,
+        maxHeight: 512,
+        maxWidth: 512,
+      );
       // Check if image is selected
       if (img != null) {
         // Upload image
         imageUploading.value = true;
-        final imageUrl = await userRepository.uploadImage('Users/Images/Profile/', img);
+        final imageUrl =
+            await userRepository.uploadImage('assets/img/profile/', img);
 
         // Update user image record
         Map<String, dynamic> json = {'ProfilePicture': imageUrl};
@@ -202,8 +208,9 @@ class UserController extends GetxController {
         user.value.profilePicture = imageUrl;
         user.refresh();
         // Display success message
-        SnackBars.successSnackBar(title: 'Congratulations', message: 'Your profile picture has been updated!');
-
+        SnackBars.successSnackBar(
+            title: 'Congratulations',
+            message: 'Your profile picture has been updated!');
       }
     } catch (e) {
       /// Remove loader
