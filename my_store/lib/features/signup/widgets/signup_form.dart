@@ -7,8 +7,8 @@ import 'package:my_store/utils/constants/sizes.dart';
 import 'package:my_store/utils/constants/texts.dart';
 import 'package:my_store/utils/validators/validator.dart';
 
-class SignupForm extends StatelessWidget {
-  const SignupForm({
+class SignUpForm extends StatelessWidget {
+  const SignUpForm({
     super.key,
   });
 
@@ -17,7 +17,7 @@ class SignupForm extends StatelessWidget {
     final controller = Get.put(SignUpController());
 
     return Form(
-      key: controller.signupFormKey,
+      key: controller.signUpFormKey,
       child: Column(
         children: [
           /// First & Last Name
@@ -116,7 +116,7 @@ class SignupForm extends StatelessWidget {
           SizedBox(
             width: double.infinity,
             child: ElevatedButton(
-              onPressed: () => controller.signup(),
+              onPressed: () => controller.signUp(),
               child: const Text(MyText.createAccount),
             ),
           ),
