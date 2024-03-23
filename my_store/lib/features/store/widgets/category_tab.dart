@@ -6,6 +6,7 @@ import 'package:my_store/global/widgets/section_heading.dart';
 import 'package:my_store/utils/constants/images.dart';
 import 'package:my_store/utils/constants/sizes.dart';
 import 'package:my_store/utils/models/category_model.dart';
+import 'package:my_store/utils/models/product_model.dart';
 
 class CategoryTab extends StatelessWidget {
   const CategoryTab({super.key, required this.category});
@@ -23,19 +24,42 @@ class CategoryTab extends StatelessWidget {
           child: Column(
             children: [
               /// Brands
-              const BrandShowcase(imgs: [MyImages.productImage3, MyImages.productImage2, MyImages.productImage1,],),
-              const BrandShowcase(imgs: [MyImages.productImage3, MyImages.productImage2, MyImages.productImage1,],),
-              const SizedBox(height: MySizes.spaceBtwItems,),
-        
+              const BrandShowcase(
+                imgs: [
+                  MyImages.productImage3,
+                  MyImages.productImage2,
+                  MyImages.productImage1,
+                ],
+              ),
+              const BrandShowcase(
+                imgs: [
+                  MyImages.productImage3,
+                  MyImages.productImage2,
+                  MyImages.productImage1,
+                ],
+              ),
+              const SizedBox(
+                height: MySizes.spaceBtwItems,
+              ),
+
               /// Products
               SectionHeading(
                 title: 'You might like',
                 onPressed: () {},
               ),
-              const SizedBox(height: MySizes.spaceBtwItems,),
-        
-              GridLayout(itemCount: 4, itemBuilder: (_, index) => const ProductCardVertical(),),
-              const SizedBox(height: MySizes.spaceBtwSections,),
+              const SizedBox(
+                height: MySizes.spaceBtwItems,
+              ),
+
+              GridLayout(
+                itemCount: 4,
+                itemBuilder: (_, index) => ProductCardVertical(
+                  product: ProductModel.empty(),
+                ),
+              ),
+              const SizedBox(
+                height: MySizes.spaceBtwSections,
+              ),
             ],
           ),
         ),
