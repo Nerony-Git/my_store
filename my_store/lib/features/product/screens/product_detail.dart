@@ -9,10 +9,13 @@ import 'package:my_store/features/product/widgets/rating_and_share.dart';
 import 'package:my_store/features/product/widgets/product_image_slider.dart';
 import 'package:my_store/global/widgets/section_heading.dart';
 import 'package:my_store/utils/constants/sizes.dart';
+import 'package:my_store/utils/models/product_model.dart';
 import 'package:readmore/readmore.dart';
 
 class ProductDetailScreen extends StatelessWidget {
-  const ProductDetailScreen({super.key});
+  const ProductDetailScreen({super.key, required this.product});
+
+  final ProductModel product;
 
   @override
   Widget build(BuildContext context) {
@@ -90,7 +93,8 @@ class ProductDetailScreen extends StatelessWidget {
                         showActionButton: false,
                       ),
                       IconButton(
-                        onPressed: () => Get.to(() => const ProductReviewsScreen()),
+                        onPressed: () =>
+                            Get.to(() => const ProductReviewsScreen()),
                         icon: const Icon(
                           Iconsax.arrow_right_3,
                           size: 18,
