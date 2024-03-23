@@ -7,8 +7,8 @@ import 'package:my_store/global/widgets/social_footer.dart';
 import 'package:my_store/utils/constants/sizes.dart';
 import 'package:my_store/utils/constants/texts.dart';
 
-class SignupScreen extends StatelessWidget {
-  const SignupScreen({super.key});
+class SignUpScreen extends StatelessWidget {
+  const SignUpScreen({super.key});
 
   @override
   Widget build(BuildContext context) {
@@ -28,7 +28,7 @@ class SignupScreen extends StatelessWidget {
               const SizedBox(height: MySizes.spaceBtwSections),
 
               /// Form
-              const SignupForm(),
+              const SignUpForm(),
 
               /// Divider
               FormDivider(
