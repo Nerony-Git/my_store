@@ -22,8 +22,15 @@ class LoginController extends GetxController {
 
   @override
   void onInit() {
-    email.text = localStorage.read('REMEMBER_ME_EMAIL');
-    password.text = localStorage.read('REMEMBER_ME_PASSWORD');
+    final rememberEmail = localStorage.read('REMEMBER_ME_EMAIL');
+    final rememberPassword = localStorage.read('REMEMBER_ME_PASSWORD');
+
+    if (rememberEmail != null) {
+      email.text = localStorage.read('REMEMBER_ME_EMAIL');
+    }
+    if (rememberPassword != null) {
+      password.text = localStorage.read('REMEMBER_ME_PASSWORD');
+    }
     super.onInit();
   }
 
@@ -92,7 +99,8 @@ class LoginController extends GetxController {
       }
 
       /// Google Authentication
-      final userCredentials = await AuthenticationRepository.instance.signInWithGoogle();
+      final userCredentials =
+          await AuthenticationRepository.instance.signInWithGoogle();
 
       /// Save user details
       await userController.saveUserDetails(userCredentials);
@@ -102,7 +110,6 @@ class LoginController extends GetxController {
 
       /// Redirect
       AuthenticationRepository.instance.screenRedirect();
-
     } catch (e) {
       /// Remove loader
       FullScreenLoader.stopLoading();
