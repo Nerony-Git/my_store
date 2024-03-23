@@ -1,15 +1,22 @@
 import 'package:flutter/material.dart';
+import 'package:get/get.dart';
 import 'package:iconsax/iconsax.dart';
 import 'package:my_store/global/widgets/custom_app_bar.dart';
+import 'package:my_store/global/widgets/data/dummy_data.dart';
 import 'package:my_store/global/widgets/data/upload_data_tile.dart';
 import 'package:my_store/global/widgets/section_heading.dart';
 import 'package:my_store/utils/constants/sizes.dart';
+import 'package:my_store/utils/controllers/upload_data_controller.dart';
+import 'package:my_store/utils/models/banner_model.dart';
 
 class UploadDataScreen extends StatelessWidget {
   const UploadDataScreen({super.key});
 
   @override
   Widget build(BuildContext context) {
+    final controller = Get.put(UploadDataController());
+    List<BannerModel> banners = DummyData.banners;
+
     return Scaffold(
       appBar: const CustomAppBar(
         title: Text('Upload Data'),
@@ -59,7 +66,7 @@ class UploadDataScreen extends StatelessWidget {
               UploadDataTile(
                 icon: Iconsax.image,
                 title: 'Upload Banners',
-                onTap: () {},
+                onTap: () => controller.uploadBanners(banners),
               ),
               const SizedBox(
                 height: MySizes.spaceBtwSections * 2,
