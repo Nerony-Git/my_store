@@ -4,13 +4,14 @@ import 'package:my_store/features/home/widgets/header_container.dart';
 import 'package:my_store/features/home/widgets/home_app_bar.dart';
 import 'package:my_store/features/home/widgets/home_categories.dart';
 import 'package:my_store/features/home/widgets/promotion_slider.dart';
+import 'package:my_store/features/product/controllers/product_controller.dart';
 import 'package:my_store/features/store/screens/all_products.dart';
 import 'package:my_store/global/widgets/layouts/grid_layout.dart';
 import 'package:my_store/global/widgets/product/product_card_vertical.dart';
 import 'package:my_store/global/widgets/search_bar.dart';
 import 'package:my_store/global/widgets/section_heading.dart';
+import 'package:my_store/global/widgets/shimmers/vertical_product_shimmer.dart';
 import 'package:my_store/utils/constants/colors.dart';
-import 'package:my_store/utils/constants/images.dart';
 import 'package:my_store/utils/constants/sizes.dart';
 
 class HomeScreen extends StatelessWidget {
@@ -18,6 +19,8 @@ class HomeScreen extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    final controller = Get.put(ProductController());
+
     return Scaffold(
       body: SingleChildScrollView(
         child: Column(
@@ -71,13 +74,7 @@ class HomeScreen extends StatelessWidget {
               child: Column(
                 children: [
                   /// Promotion Slider Section
-                  const PromotionSlider(
-                    banners: [
-                      MyImages.promoBanner1,
-                      MyImages.promoBanner2,
-                      MyImages.promoBanner3,
-                    ],
-                  ),
+                  const PromotionSlider(),
                   const SizedBox(
                     height: MySizes.spaceBtwSections,
                   ),
@@ -91,10 +88,26 @@ class HomeScreen extends StatelessWidget {
                     height: MySizes.spaceBtwItems,
                   ),
 
-                  GridLayout(
-                    itemCount: 4,
-                    itemBuilder: (_, index) => const ProductCardVertical(),
-                  ),
+                  Obx(() {
+                    if (controller.isLoading.value) {
+                      return const VerticalProductShimmer();
+                    }
+
+                    if (controller.featuredProducts.isEmpty) {
+                      return Center(
+                        child: Text(
+                          'No Data Found',
+                          style: Theme.of(context).textTheme.bodyMedium,
+                        ),
+                      );
+                    }
+
+                    return GridLayout(
+                      itemCount: controller.featuredProducts.length,
+                      itemBuilder: (_, index) => ProductCardVertical(
+                          product: controller.featuredProducts[index]),
+                    );
+                  }),
                 ],
               ),
             ),
