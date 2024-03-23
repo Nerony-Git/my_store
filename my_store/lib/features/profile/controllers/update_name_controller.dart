@@ -21,12 +21,12 @@ class UpdateNameController extends GetxController {
   /// Initialize user data
   @override
   void onInit() {
-    initiazeNames();
+    initializeNames();
     super.onInit();
   }
 
   /// Fetch user data
-  Future<void> initiazeNames() async {
+  Future<void> initializeNames() async {
     firstName.text = userController.user.value.firstName;
     lastName.text = userController.user.value.lastName;
   }
@@ -50,7 +50,10 @@ class UpdateNameController extends GetxController {
         FullScreenLoader.stopLoading();
         return;
       }
-      Map<String, dynamic> name = {'FirstName': firstName.text.trim(), 'LastName': lastName.text.trim(),};
+      Map<String, dynamic> name = {
+        'FirstName': firstName.text.trim(),
+        'LastName': lastName.text.trim(),
+      };
       await userRepository.updateSingleField(name);
 
       /// Update the Rx user values
@@ -61,7 +64,10 @@ class UpdateNameController extends GetxController {
       FullScreenLoader.stopLoading();
 
       /// Show success message
-      SnackBars.successSnackBar(title: 'Congratulations', message: 'Your name has been updated.',);
+      SnackBars.successSnackBar(
+        title: 'Congratulations',
+        message: 'Your name has been updated.',
+      );
 
       /// Move to the profile screen
       Get.off(() => const ProfileScreen());
