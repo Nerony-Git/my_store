@@ -6,8 +6,8 @@ import 'package:my_store/utils/constants/sizes.dart';
 import 'package:my_store/utils/constants/texts.dart';
 import 'package:my_store/utils/validators/validator.dart';
 
-class ForgetPassword extends StatelessWidget {
-  const ForgetPassword({super.key});
+class ForgetPasswordScreen extends StatelessWidget {
+  const ForgetPasswordScreen({super.key});
 
   @override
   Widget build(BuildContext context) {
