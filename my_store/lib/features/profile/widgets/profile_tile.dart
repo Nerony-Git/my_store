@@ -3,11 +3,11 @@ import 'package:iconsax/iconsax.dart';
 import 'package:my_store/features/profile/controllers/user_controller.dart';
 import 'package:my_store/global/widgets/imgs/round_image.dart';
 import 'package:my_store/utils/constants/colors.dart';
-import 'package:my_store/utils/constants/images.dart';
 
 class ProfileTile extends StatelessWidget {
   const ProfileTile({
-    super.key, required this.onPressed,
+    super.key,
+    required this.onPressed,
   });
 
   final VoidCallback onPressed;
@@ -17,10 +17,33 @@ class ProfileTile extends StatelessWidget {
     final controller = UserController.instance;
 
     return ListTile(
-      leading: const RoundImage(img: MyImages.user, width: 50, height: 50, padding: 0,),
-      title: Text(controller.user.value.fullName, style: Theme.of(context).textTheme.headlineSmall!.apply(color: MyColors.white),),
-      subtitle: Text(controller.user.value.email, style: Theme.of(context).textTheme.bodyMedium!.apply(color: MyColors.white),),
-      trailing: IconButton(onPressed: onPressed, icon: const Icon(Iconsax.edit, color: MyColors.white,)),
+      leading: RoundImage(
+        img: controller.user.value.profilePicture,
+        width: 50,
+        height: 50,
+        padding: 0,
+        isNetworkImage: true,
+      ),
+      title: Text(
+        controller.user.value.fullName,
+        style: Theme.of(context)
+            .textTheme
+            .headlineSmall!
+            .apply(color: MyColors.white),
+      ),
+      subtitle: Text(
+        controller.user.value.email,
+        style: Theme.of(context)
+            .textTheme
+            .bodyMedium!
+            .apply(color: MyColors.white),
+      ),
+      trailing: IconButton(
+          onPressed: onPressed,
+          icon: const Icon(
+            Iconsax.edit,
+            color: MyColors.white,
+          )),
     );
   }
 }
