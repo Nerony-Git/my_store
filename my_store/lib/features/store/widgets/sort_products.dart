@@ -3,6 +3,7 @@ import 'package:iconsax/iconsax.dart';
 import 'package:my_store/global/widgets/layouts/grid_layout.dart';
 import 'package:my_store/global/widgets/product/product_card_vertical.dart';
 import 'package:my_store/utils/constants/sizes.dart';
+import 'package:my_store/utils/models/product_model.dart';
 
 class SortProducts extends StatelessWidget {
   const SortProducts({
@@ -43,7 +44,9 @@ class SortProducts extends StatelessWidget {
         /// Products
         GridLayout(
           itemCount: 8,
-          itemBuilder: (_, index) => const ProductCardVertical(),
+          itemBuilder: (_, index) => ProductCardVertical(
+            product: ProductModel.empty(),
+          ),
         ),
       ],
     );
