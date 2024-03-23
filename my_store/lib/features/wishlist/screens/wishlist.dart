@@ -7,6 +7,7 @@ import 'package:my_store/global/widgets/icons/rounded_icon.dart';
 import 'package:my_store/global/widgets/layouts/grid_layout.dart';
 import 'package:my_store/global/widgets/product/product_card_vertical.dart';
 import 'package:my_store/utils/constants/sizes.dart';
+import 'package:my_store/utils/models/product_model.dart';
 
 class WishlistScreen extends StatelessWidget {
   const WishlistScreen({super.key});
@@ -15,9 +16,15 @@ class WishlistScreen extends StatelessWidget {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: CustomAppBar(
-        title: Text('Wishlist', style: Theme.of(context).textTheme.headlineMedium,),
+        title: Text(
+          'Wishlist',
+          style: Theme.of(context).textTheme.headlineMedium,
+        ),
         actions: [
-          RoundedIcon(icon: Iconsax.add, onPressed: () => Get.to(const HomeScreen()),),
+          RoundedIcon(
+            icon: Iconsax.add,
+            onPressed: () => Get.to(const HomeScreen()),
+          ),
         ],
       ),
       body: SingleChildScrollView(
@@ -25,7 +32,12 @@ class WishlistScreen extends StatelessWidget {
           padding: const EdgeInsets.all(MySizes.defaultSpace),
           child: Column(
             children: [
-              GridLayout(itemCount: 6, itemBuilder: (_, index) => const ProductCardVertical(),),
+              GridLayout(
+                itemCount: 6,
+                itemBuilder: (_, index) => ProductCardVertical(
+                  product: ProductModel.empty(),
+                ),
+              ),
             ],
           ),
         ),
