@@ -21,10 +21,10 @@ class SignUpController extends GetxController {
   final phoneNumber = TextEditingController();
   final hidePassword = true.obs;
   final privacyPolicy = true.obs;
-  GlobalKey<FormState> signupFormKey = GlobalKey<FormState>();
+  GlobalKey<FormState> signUpFormKey = GlobalKey<FormState>();
 
   /// SignUp
-  void signup() async {
+  void signUp() async {
     try {
       /// Star loading
       FullScreenLoader.openLoadingDialog(
@@ -41,12 +41,11 @@ class SignUpController extends GetxController {
       }
 
       /// Form validation
-      if (!signupFormKey.currentState!.validate()) {
+      if (!signUpFormKey.currentState!.validate()) {
         /// Remove loader
         FullScreenLoader.stopLoading();
         return;
       }
-      ;
 
       /// Privacy policy check
       if (!privacyPolicy.value) {
