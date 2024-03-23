@@ -66,6 +66,7 @@ flutter:
   assets:
     - assets/fonts/
     - assets/icons/
+    - assets/icons/brands/
     - assets/icons/categories/
     - assets/icons/payment_methods/
     - assets/img/onboarding/
