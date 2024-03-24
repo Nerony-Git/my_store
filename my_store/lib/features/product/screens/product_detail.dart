@@ -8,6 +8,7 @@ import 'package:my_store/features/product/widgets/product_meta_data.dart';
 import 'package:my_store/features/product/widgets/rating_and_share.dart';
 import 'package:my_store/features/product/widgets/product_image_slider.dart';
 import 'package:my_store/global/widgets/section_heading.dart';
+import 'package:my_store/utils/constants/enums.dart';
 import 'package:my_store/utils/constants/sizes.dart';
 import 'package:my_store/utils/models/product_model.dart';
 import 'package:readmore/readmore.dart';
@@ -25,7 +26,9 @@ class ProductDetailScreen extends StatelessWidget {
         child: Column(
           children: [
             /// Product images slider
-            const ProductImageSlider(),
+            ProductImageSlider(
+              product: product,
+            ),
 
             /// Product details
             Padding(
@@ -40,13 +43,19 @@ class ProductDetailScreen extends StatelessWidget {
                   const RatingAndShare(),
 
                   /// Price, title, stock and brand
-                  const ProductMetaData(),
+                  ProductMetaData(
+                    product: product,
+                  ),
 
                   /// Attributes
-                  const ProductAttributes(),
-                  const SizedBox(
-                    height: MySizes.spaceBtwSections,
-                  ),
+                  if (product.productType == ProductType.variable.toString())
+                    ProductAttributes(
+                      product: product,
+                    ),
+                  if (product.productType == ProductType.variable.toString())
+                    const SizedBox(
+                      height: MySizes.spaceBtwSections,
+                    ),
 
                   /// Checkout button
                   SizedBox(
@@ -68,8 +77,8 @@ class ProductDetailScreen extends StatelessWidget {
                   const SizedBox(
                     height: MySizes.spaceBtwItems,
                   ),
-                  const ReadMoreText(
-                    'This is a product description for Green Nike Shoes. There are more things that can be added here. There are more things that can be added here.',
+                  ReadMoreText(
+                    product.description ?? '',
                     trimLines: 2,
                     trimMode: TrimMode.Line,
                     trimCollapsedText: ' more >>',
