@@ -8,6 +8,7 @@ import 'package:my_store/global/widgets/section_heading.dart';
 import 'package:my_store/utils/constants/sizes.dart';
 import 'package:my_store/utils/controllers/upload_data_controller.dart';
 import 'package:my_store/utils/models/banner_model.dart';
+import 'package:my_store/utils/models/product_model.dart';
 
 class UploadDataScreen extends StatelessWidget {
   const UploadDataScreen({super.key});
@@ -16,6 +17,7 @@ class UploadDataScreen extends StatelessWidget {
   Widget build(BuildContext context) {
     final controller = Get.put(UploadDataController());
     List<BannerModel> banners = DummyData.banners;
+    List<ProductModel> products = DummyData.products;
 
     return Scaffold(
       appBar: const CustomAppBar(
@@ -57,7 +59,7 @@ class UploadDataScreen extends StatelessWidget {
               UploadDataTile(
                 icon: Iconsax.shopping_cart,
                 title: 'Upload Products',
-                onTap: () {},
+                onTap: () => controller.uploadProducts(products),
               ),
               const SizedBox(
                 height: MySizes.spaceBtwItems,
