@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:my_store/features/product/controllers/product_controller.dart';
 import 'package:my_store/global/widgets/containers/rounded_container.dart';
 import 'package:my_store/global/widgets/imgs/round_image.dart';
 import 'package:my_store/global/widgets/product/brand_title_with_icon.dart';
@@ -6,15 +7,20 @@ import 'package:my_store/global/widgets/product/product_price.dart';
 import 'package:my_store/global/widgets/product/product_title.dart';
 import 'package:my_store/utils/constants/colors.dart';
 import 'package:my_store/utils/constants/enums.dart';
-import 'package:my_store/utils/constants/images.dart';
 import 'package:my_store/utils/constants/sizes.dart';
 import 'package:my_store/utils/helpers/helper_functions.dart';
+import 'package:my_store/utils/models/product_model.dart';
 
 class ProductMetaData extends StatelessWidget {
-  const ProductMetaData({super.key});
+  const ProductMetaData({super.key, required this.product});
+
+  final ProductModel product;
 
   @override
   Widget build(BuildContext context) {
+    final controller = ProductController.instance;
+    final discountPercentage =
+        controller.getDiscountPercentage(product.price, product.salePrice);
     final dark = HelperFunctions.isDarkMode(context);
 
     return Column(
@@ -32,7 +38,7 @@ class ProductMetaData extends StatelessWidget {
                 vertical: MySizes.xs,
               ),
               child: Text(
-                '20%',
+                '$discountPercentage%',
                 style: Theme.of(context)
                     .textTheme
                     .labelLarge!
@@ -44,18 +50,22 @@ class ProductMetaData extends StatelessWidget {
             ),
 
             /// Price
-            Text(
-              '£350',
-              style: Theme.of(context)
-                  .textTheme
-                  .titleSmall!
-                  .apply(decoration: TextDecoration.lineThrough),
-            ),
-            const SizedBox(
-              width: MySizes.spaceBtwItems,
-            ),
-            const ProductPrice(
-              price: '280',
+            if (product.productType == ProductType.single.toString() &&
+                product.salePrice > 0)
+              Text(
+                '£${product.price}',
+                style: Theme.of(context)
+                    .textTheme
+                    .titleSmall!
+                    .apply(decoration: TextDecoration.lineThrough),
+              ),
+            if (product.productType == ProductType.single.toString() &&
+                product.salePrice > 0)
+              const SizedBox(
+                width: MySizes.spaceBtwItems,
+              ),
+            ProductPrice(
+              price: controller.getProductPrice(product),
               isLarge: true,
             ),
           ],
@@ -65,7 +75,7 @@ class ProductMetaData extends StatelessWidget {
         ),
 
         /// Title
-        const ProductTitle(title: 'Green Nike Air Shoe'),
+        ProductTitle(title: product.title),
         const SizedBox(
           height: MySizes.spaceBtwItems / 1.5,
         ),
@@ -78,7 +88,7 @@ class ProductMetaData extends StatelessWidget {
               width: MySizes.spaceBtwItems,
             ),
             Text(
-              'In Stock',
+              controller.getStockStatus(product.stock),
               style: Theme.of(context).textTheme.titleMedium,
             ),
           ],
@@ -88,7 +98,7 @@ class ProductMetaData extends StatelessWidget {
         Row(
           children: [
             RoundImage(
-              img: MyImages.shoeIcon,
+              img: product.brand != null ? product.brand!.image : '',
               width: 32,
               height: 32,
               overlayColor: dark ? MyColors.white : MyColors.black,
@@ -96,8 +106,8 @@ class ProductMetaData extends StatelessWidget {
             const SizedBox(
               width: MySizes.spaceBtwItems / 2,
             ),
-            const BrandTitleWithIcon(
-              title: 'Nike',
+            BrandTitleWithIcon(
+              title: product.brand != null ? product.brand!.name : '',
               brandTextSize: TextSizes.medium,
             ),
           ],
