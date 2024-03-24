@@ -44,7 +44,6 @@ class ProductCardVertical extends StatelessWidget {
             /// Product card
             RoundedContainer(
               height: 180,
-              width: 180,
               padding: const EdgeInsets.all(MySizes.sm),
               backgroundColor: dark ? MyColors.dark : MyColors.light,
               child: Stack(
@@ -129,7 +128,7 @@ class ProductCardVertical extends StatelessWidget {
                         Padding(
                           padding: const EdgeInsets.only(left: MySizes.sm),
                           child: Text(
-                            product.price.toString(),
+                            '£${product.price.toString()}',
                             style: Theme.of(context)
                                 .textTheme
                                 .labelMedium!
