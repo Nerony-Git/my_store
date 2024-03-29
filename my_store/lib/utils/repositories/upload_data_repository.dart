@@ -8,6 +8,7 @@ import 'package:my_store/utils/exceptions/firebase_exceptions.dart';
 import 'package:my_store/utils/exceptions/platform_exceptions.dart';
 import 'package:my_store/utils/helpers/firebase_storage_service.dart';
 import 'package:my_store/utils/models/banner_model.dart';
+import 'package:my_store/utils/models/brand_model.dart';
 import 'package:my_store/utils/models/product_model.dart';
 
 class UploadDataRepository extends GetxController {
@@ -117,6 +118,39 @@ class UploadDataRepository extends GetxController {
       throw CustomFirebaseException(e.code).message;
     } on SocketException catch (e) {
       throw e.message;
+    } on PlatformException catch (e) {
+      throw CustomPlatformException(e.code).message;
+    } catch (e) {
+      throw 'Something went wrong. Please try again!';
+    }
+  }
+
+  /// Function to upload brands
+  Future<void> uploadBrandData(List<BrandModel> brands) async {
+    try {
+      // Upload all the brands along with their images
+      final storage = Get.put(CustomFirebaseStorageService());
+
+      // Loop through each brand
+      for (var brand in brands) {
+        // get image data link from the local assets
+        final file = await storage.getImageDataFromAssets(brand.image);
+
+        // Get the file name
+        final fileName = brand.image.split('/').last;
+
+        // Upload image and get its url
+        final url =
+            await storage.uploadImageData('assets/img/brands', file, fileName);
+
+        // Assign URL to brand image attribute
+        brand.image = url;
+
+        // Store brand data in Firestore
+        await _db.collection("Brands").doc(brand.id).set(brand.toJson());
+      }
+    } on FirebaseException catch (e) {
+      throw CustomFirebaseException(e.code).message;
     } on PlatformException catch (e) {
       throw CustomPlatformException(e.code).message;
     } catch (e) {
