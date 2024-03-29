@@ -13,6 +13,7 @@ import 'package:my_store/utils/exceptions/firebase_auth_exceptions.dart';
 import 'package:my_store/utils/exceptions/firebase_exceptions.dart';
 import 'package:my_store/utils/exceptions/format_exceptions.dart';
 import 'package:my_store/utils/exceptions/platform_exceptions.dart';
+import 'package:my_store/utils/storage/local_storage.dart';
 
 class AuthenticationRepository extends GetxController {
   static AuthenticationRepository get instance => Get.find();
@@ -35,15 +36,20 @@ class AuthenticationRepository extends GetxController {
   }
 
   /// Function to show relevant screen
-  screenRedirect() async {
+  void screenRedirect() async {
     final user = _auth.currentUser;
 
     /// Check if user has data
     if (user != null) {
       /// Check if user is verified
       if (user.emailVerified) {
+        // Initialize user specific storage
+        await MyLocalStorage.init(user.uid);
+
+        // If the user's email is verified, navigate to the main navigation menu
         Get.offAll(() => const NavigationMenu());
       } else {
+        // If the user's email is not verified, navigate to the verify email screen
         Get.offAll(() => VerifyEmailScreen(
               email: _auth.currentUser?.email,
             ));
