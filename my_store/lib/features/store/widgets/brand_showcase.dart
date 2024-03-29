@@ -4,10 +4,12 @@ import 'package:my_store/global/widgets/containers/rounded_container.dart';
 import 'package:my_store/utils/constants/colors.dart';
 import 'package:my_store/utils/constants/sizes.dart';
 import 'package:my_store/utils/helpers/helper_functions.dart';
+import 'package:my_store/utils/models/brand_model.dart';
 
 class BrandShowcase extends StatelessWidget {
   const BrandShowcase({
-    super.key, required this.imgs,
+    super.key,
+    required this.imgs,
   });
 
   final List<String> imgs;
@@ -23,12 +25,15 @@ class BrandShowcase extends StatelessWidget {
       child: Column(
         children: [
           /// Brand with products count
-          const BrandCard(showBorder: false,),
-    
+          BrandCard(
+            showBorder: false,
+            brand: BrandModel.empty(),
+          ),
+
           /// Brand's top 3 product images
           Row(
-            children: imgs.map((img) => brandTopProducts(img, context)).toList()
-          ),
+              children:
+                  imgs.map((img) => brandTopProducts(img, context)).toList()),
         ],
       ),
     );
@@ -36,7 +41,7 @@ class BrandShowcase extends StatelessWidget {
 
   Widget brandTopProducts(String img, context) {
     final dark = HelperFunctions.isDarkMode(context);
-    
+
     return Expanded(
       child: RoundedContainer(
         height: 100,
