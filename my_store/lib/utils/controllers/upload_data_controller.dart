@@ -2,6 +2,7 @@ import 'package:get/get.dart';
 import 'package:my_store/utils/constants/images.dart';
 import 'package:my_store/utils/helpers/network_manager.dart';
 import 'package:my_store/utils/models/banner_model.dart';
+import 'package:my_store/utils/models/brand_model.dart';
 import 'package:my_store/utils/models/product_model.dart';
 import 'package:my_store/utils/popups/fullscreen_loader.dart';
 import 'package:my_store/utils/popups/loaders.dart';
@@ -72,6 +73,42 @@ class UploadDataController extends GetxController {
       SnackBars.successSnackBar(
         title: 'Success',
         message: 'Products uploaded successfully.',
+      );
+    } catch (e) {
+      /// Remove loader
+      FullScreenLoader.stopLoading();
+
+      /// Show some generic error to the user
+      SnackBars.errorSnackBar(
+        title: 'Oh Snap',
+        message: e.toString(),
+      );
+    }
+  }
+
+  /// Upload Brands
+  Future<void> uploadBrands(List<BrandModel> brands) async {
+    try {
+      /// Start Loading
+      FullScreenLoader.openLoadingDialog(
+          'We are uploading your brands...', MyImages.cloudUploadingAnimation);
+
+      /// Check internet connectivity
+      final isConnected = await NetworkManager.instance.isConnected();
+      if (!isConnected) {
+        FullScreenLoader.stopLoading();
+        return;
+      }
+
+      await _uploadDataRepository.uploadBrandData(brands);
+
+      /// Remove loader
+      FullScreenLoader.stopLoading();
+
+      /// Show success message
+      SnackBars.successSnackBar(
+        title: 'Success',
+        message: 'Brands uploaded successfully.',
       );
     } catch (e) {
       /// Remove loader
