@@ -11,7 +11,7 @@ class RoundedIcon extends StatelessWidget {
     this.size = MySizes.lg,
     required this.icon,
     this.color,
-    this.backgroundColor,
+    this.backgroundColor = Colors.transparent,
     this.onPressed,
   });
 
