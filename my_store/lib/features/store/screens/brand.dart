@@ -37,7 +37,7 @@ class BrandScreen extends StatelessWidget {
 
               /// Brand products
               FutureBuilder(
-                  future: controller.getBrandProducts(brand.id),
+                  future: controller.getBrandProducts(brandID: brand.id),
                   builder: (context, snapshot) {
                     // Handel loader, no record or error message
                     const loader = VerticalProductShimmer();
