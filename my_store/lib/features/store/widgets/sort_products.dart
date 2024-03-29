@@ -1,5 +1,7 @@
 import 'package:flutter/material.dart';
+import 'package:get/get.dart';
 import 'package:iconsax/iconsax.dart';
+import 'package:my_store/features/store/controllers/all_products_controller.dart';
 import 'package:my_store/global/widgets/layouts/grid_layout.dart';
 import 'package:my_store/global/widgets/product/product_card_vertical.dart';
 import 'package:my_store/utils/constants/sizes.dart';
@@ -8,10 +10,16 @@ import 'package:my_store/utils/models/product_model.dart';
 class SortProducts extends StatelessWidget {
   const SortProducts({
     super.key,
+    required this.products,
   });
+
+  final List<ProductModel> products;
 
   @override
   Widget build(BuildContext context) {
+    final controller = Get.put(AllProductsController());
+    controller.assignProducts(products);
+
     return Column(
       children: [
         /// Filter
@@ -20,6 +28,7 @@ class SortProducts extends StatelessWidget {
             prefixIcon: Icon(Iconsax.sort),
             hintText: 'Sort By',
           ),
+          value: controller.selectedSortOption.value,
           items: [
             'Name',
             'High - Low price',
@@ -35,17 +44,22 @@ class SortProducts extends StatelessWidget {
                 ),
               )
               .toList(),
-          onChanged: (value) {},
+          onChanged: (value) {
+            // Sort products based on the selected option
+            controller.sortProducts(value!);
+          },
         ),
         const SizedBox(
           height: MySizes.spaceBtwSections,
         ),
 
         /// Products
-        GridLayout(
-          itemCount: 8,
-          itemBuilder: (_, index) => ProductCardVertical(
-            product: ProductModel.empty(),
+        Obx(
+          () => GridLayout(
+            itemCount: controller.products.length,
+            itemBuilder: (_, index) => ProductCardVertical(
+              product: controller.products[index],
+            ),
           ),
         ),
       ],
