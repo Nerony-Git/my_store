@@ -8,7 +8,10 @@ import 'package:my_store/utils/exceptions/firebase_exceptions.dart';
 import 'package:my_store/utils/exceptions/platform_exceptions.dart';
 import 'package:my_store/utils/helpers/firebase_storage_service.dart';
 import 'package:my_store/utils/models/banner_model.dart';
+import 'package:my_store/utils/models/brand_category_model.dart';
 import 'package:my_store/utils/models/brand_model.dart';
+import 'package:my_store/utils/models/category_model.dart';
+import 'package:my_store/utils/models/product_category_model.dart';
 import 'package:my_store/utils/models/product_model.dart';
 
 class UploadDataRepository extends GetxController {
@@ -148,6 +151,77 @@ class UploadDataRepository extends GetxController {
 
         // Store brand data in Firestore
         await _db.collection("Brands").doc(brand.id).set(brand.toJson());
+      }
+    } on FirebaseException catch (e) {
+      throw CustomFirebaseException(e.code).message;
+    } on PlatformException catch (e) {
+      throw CustomPlatformException(e.code).message;
+    } catch (e) {
+      throw 'Something went wrong. Please try again!';
+    }
+  }
+
+  /// Function to upload product category
+  Future<void> uploadProductCategory(
+      List<ProductCategoryModel> categories) async {
+    try {
+      // Loop through each products category
+      for (var category in categories) {
+        // Store product categories data in FireStore
+        await _db.collection("ProductCategory").add(category.toJson());
+      }
+    } on FirebaseException catch (e) {
+      throw CustomFirebaseException(e.code).message;
+    } on PlatformException catch (e) {
+      throw CustomPlatformException(e.code).message;
+    } catch (e) {
+      throw 'Something went wrong. Please try again!';
+    }
+  }
+
+  /// Function to upload brand category
+  Future<void> uploadBrandCategory(List<BrandCategoryModel> categories) async {
+    try {
+      // Loop through each products category
+      for (var category in categories) {
+        // Store brand categories data in FireStore
+        await _db.collection("BrandCategory").add(category.toJson());
+      }
+    } on FirebaseException catch (e) {
+      throw CustomFirebaseException(e.code).message;
+    } on PlatformException catch (e) {
+      throw CustomPlatformException(e.code).message;
+    } catch (e) {
+      throw 'Something went wrong. Please try again!';
+    }
+  }
+
+  /// Function to upload categories
+  Future<void> uploadCategoryData(List<CategoryModel> categories) async {
+    try {
+      // Upload all the categories along with their images
+      final storage = Get.put(CustomFirebaseStorageService());
+
+      // Loop through each category
+      for (var category in categories) {
+        // get image data link from the local assets
+        final file = await storage.getImageDataFromAssets(category.img);
+
+        // Get the file name
+        final fileName = category.img.split('/').last;
+
+        // Upload image and get its url
+        final url = await storage.uploadImageData(
+            'assets/img/categories', file, fileName);
+
+        // Assign URL to category image attribute
+        category.img = url;
+
+        // Store categories data in FireStore
+        await _db
+            .collection("Categories")
+            .doc(category.id)
+            .set(category.toJson());
       }
     } on FirebaseException catch (e) {
       throw CustomFirebaseException(e.code).message;
