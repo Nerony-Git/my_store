@@ -1,11 +1,10 @@
 import 'package:cached_network_image/cached_network_image.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
-import 'package:iconsax/iconsax.dart';
 import 'package:my_store/features/product/controllers/product_image_controller.dart';
 import 'package:my_store/global/widgets/curved_edge.dart';
 import 'package:my_store/global/widgets/custom_app_bar.dart';
-import 'package:my_store/global/widgets/icons/rounded_icon.dart';
+import 'package:my_store/global/widgets/icons/wishlist_icon.dart';
 import 'package:my_store/global/widgets/imgs/rounded_image.dart';
 import 'package:my_store/utils/constants/colors.dart';
 import 'package:my_store/utils/constants/sizes.dart';
@@ -92,12 +91,11 @@ class ProductImageSlider extends StatelessWidget {
             ),
 
             /// AppBar icons
-            const CustomAppBar(
+            CustomAppBar(
               showBackArrow: true,
               actions: [
-                RoundedIcon(
-                  icon: Iconsax.heart5,
-                  color: Colors.red,
+                WishlistIcon(
+                  productID: product.id,
                 ),
               ],
             ),
