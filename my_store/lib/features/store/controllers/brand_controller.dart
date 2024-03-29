@@ -9,7 +9,7 @@ class BrandController extends GetxController {
   static BrandController get instance => Get.find();
 
   /// Variables
-  RxBool isLoading = true.obs;
+  RxBool isLoading = false.obs;
   final RxList<BrandModel> allBrands = <BrandModel>[].obs;
   final RxList<BrandModel> featuredBrands = <BrandModel>[].obs;
   final brandRepository = Get.put(BrandRepository());
@@ -49,9 +49,6 @@ class BrandController extends GetxController {
   // Get brand specific products
   Future<List<ProductModel>> getBrandProducts(String brandID) async {
     try {
-      // Show loader while loading brands
-      isLoading.value = true;
-
       // Fetch brand's products from products repository
       final products =
           await ProductRepository.instance.getBrandProducts(brandID: brandID);
@@ -64,9 +61,6 @@ class BrandController extends GetxController {
         message: e.toString(),
       );
       return [];
-    } finally {
-      // Stop loader
-      isLoading.value = false;
     }
   }
 }
