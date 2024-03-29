@@ -18,6 +18,7 @@ import 'package:my_store/features/store/screens/checkout.dart';
 import 'package:my_store/features/store/screens/store.dart';
 import 'package:my_store/features/store/screens/sub_category.dart';
 import 'package:my_store/features/wishlist/screens/wishlist.dart';
+import 'package:my_store/utils/models/brand_model.dart';
 import 'package:my_store/utils/models/product_model.dart';
 import 'package:my_store/utils/routes/routes.dart';
 
@@ -48,7 +49,15 @@ class AppRoutes {
             )),
     GetPage(
         name: Routes.productReviews, page: () => const ProductReviewsScreen()),
-    GetPage(name: Routes.brand, page: () => const BrandScreen()),
-    GetPage(name: Routes.allProducts, page: () => const AllProductsScreen()),
+    GetPage(
+        name: Routes.brand,
+        page: () => BrandScreen(
+              brand: BrandModel.empty(),
+            )),
+    GetPage(
+        name: Routes.allProducts,
+        page: () => const AllProductsScreen(
+              title: 'Popular Products',
+            )),
   ];
 }
