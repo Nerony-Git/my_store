@@ -58,22 +58,23 @@ class ProductCardVertical extends StatelessWidget {
                   ),
 
                   /// Discount Tag
-                  Positioned(
-                    top: 12,
-                    child: RoundedContainer(
-                      radius: MySizes.sm,
-                      backgroundColor: MyColors.secondary.withOpacity(0.8),
-                      padding: const EdgeInsets.symmetric(
-                          horizontal: MySizes.sm, vertical: MySizes.xs),
-                      child: Text(
-                        '$salePercentage%',
-                        style: Theme.of(context)
-                            .textTheme
-                            .labelLarge!
-                            .apply(color: MyColors.black),
+                  if (salePercentage != null)
+                    Positioned(
+                      top: 12,
+                      child: RoundedContainer(
+                        radius: MySizes.sm,
+                        backgroundColor: MyColors.secondary.withOpacity(0.8),
+                        padding: const EdgeInsets.symmetric(
+                            horizontal: MySizes.sm, vertical: MySizes.xs),
+                        child: Text(
+                          '$salePercentage%',
+                          style: Theme.of(context)
+                              .textTheme
+                              .labelLarge!
+                              .apply(color: MyColors.black),
+                        ),
                       ),
                     ),
-                  ),
 
                   /// WishList
                   const Positioned(
