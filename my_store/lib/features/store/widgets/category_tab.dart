@@ -1,10 +1,16 @@
 import 'package:flutter/material.dart';
+import 'package:get/get.dart';
+import 'package:my_store/features/store/controllers/category_controller.dart';
+import 'package:my_store/features/store/screens/all_products.dart';
 import 'package:my_store/features/store/widgets/brand_showcase.dart';
+import 'package:my_store/features/store/widgets/category_brands.dart';
 import 'package:my_store/global/widgets/layouts/grid_layout.dart';
 import 'package:my_store/global/widgets/product/product_card_vertical.dart';
 import 'package:my_store/global/widgets/section_heading.dart';
+import 'package:my_store/global/widgets/shimmers/vertical_product_shimmer.dart';
 import 'package:my_store/utils/constants/images.dart';
 import 'package:my_store/utils/constants/sizes.dart';
+import 'package:my_store/utils/helpers/cloud_functions.dart';
 import 'package:my_store/utils/models/category_model.dart';
 import 'package:my_store/utils/models/product_model.dart';
 
@@ -15,6 +21,8 @@ class CategoryTab extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    final controller = CategoryController.instance;
+
     return ListView(
       shrinkWrap: true,
       physics: const NeverScrollableScrollPhysics(),
@@ -24,42 +32,46 @@ class CategoryTab extends StatelessWidget {
           child: Column(
             children: [
               /// Brands
-              const BrandShowcase(
-                imgs: [
-                  MyImages.productImage3,
-                  MyImages.productImage2,
-                  MyImages.productImage1,
-                ],
-              ),
-              const BrandShowcase(
-                imgs: [
-                  MyImages.productImage3,
-                  MyImages.productImage2,
-                  MyImages.productImage1,
-                ],
-              ),
+              CategoryBrands(category: category),
               const SizedBox(
                 height: MySizes.spaceBtwItems,
               ),
 
               /// Products
-              SectionHeading(
-                title: 'You might like',
-                onPressed: () {},
-              ),
-              const SizedBox(
-                height: MySizes.spaceBtwItems,
-              ),
+              FutureBuilder(
+                  future:
+                      controller.getCategoryProducts(categoryID: category.id),
+                  builder: (context, snapshot) {
+                    /// Handle loader, no record, or error message
+                    const loader = VerticalProductShimmer();
+                    final widget = CloudFunctions.checkMultiRecordState(
+                        snapshot: snapshot, loader: loader);
+                    if (widget != null) return widget;
 
-              GridLayout(
-                itemCount: 4,
-                itemBuilder: (_, index) => ProductCardVertical(
-                  product: ProductModel.empty(),
-                ),
-              ),
-              const SizedBox(
-                height: MySizes.spaceBtwSections,
-              ),
+                    /// Record found
+                    final products = snapshot.data!;
+
+                    return Column(
+                      children: [
+                        SectionHeading(
+                          title: 'You might like',
+                          onPressed: () => Get.to(AllProductsScreen(
+                            title: category.name,
+                            futureMethod: controller.getCategoryProducts(
+                                categoryID: category.id, limit: -1),
+                          )),
+                        ),
+                        const SizedBox(
+                          height: MySizes.spaceBtwItems,
+                        ),
+                        GridLayout(
+                          itemCount: products.length,
+                          itemBuilder: (_, index) =>
+                              ProductCardVertical(product: products[index]),
+                        ),
+                      ],
+                    );
+                  }),
             ],
           ),
         ),
