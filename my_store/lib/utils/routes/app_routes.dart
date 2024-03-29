@@ -19,6 +19,7 @@ import 'package:my_store/features/store/screens/store.dart';
 import 'package:my_store/features/store/screens/sub_category.dart';
 import 'package:my_store/features/store/screens/wishlist.dart';
 import 'package:my_store/utils/models/brand_model.dart';
+import 'package:my_store/utils/models/category_model.dart';
 import 'package:my_store/utils/models/product_model.dart';
 import 'package:my_store/utils/routes/routes.dart';
 
@@ -41,7 +42,11 @@ class AppRoutes {
     GetPage(
         name: Routes.forgetPassword, page: () => const ForgetPasswordScreen()),
     GetPage(name: Routes.onBoarding, page: () => const OnBoardingScreen()),
-    GetPage(name: Routes.subCategories, page: () => const SubCategoryScreen()),
+    GetPage(
+        name: Routes.subCategories,
+        page: () => SubCategoryScreen(
+              category: CategoryModel.empty(),
+            )),
     GetPage(
         name: Routes.productDetails,
         page: () => ProductDetailScreen(
