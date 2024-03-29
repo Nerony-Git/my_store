@@ -17,7 +17,7 @@ import 'package:my_store/features/store/screens/cart.dart';
 import 'package:my_store/features/store/screens/checkout.dart';
 import 'package:my_store/features/store/screens/store.dart';
 import 'package:my_store/features/store/screens/sub_category.dart';
-import 'package:my_store/features/wishlist/screens/wishlist.dart';
+import 'package:my_store/features/store/screens/wishlist.dart';
 import 'package:my_store/utils/models/brand_model.dart';
 import 'package:my_store/utils/models/product_model.dart';
 import 'package:my_store/utils/routes/routes.dart';
