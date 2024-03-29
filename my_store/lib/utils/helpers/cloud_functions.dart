@@ -64,7 +64,7 @@ class CloudFunctions {
     }
 
     // Check if snapshot is null or empty
-    if (!snapshot.hasData || snapshot.data == null) {
+    if (!snapshot.hasData || snapshot.data == null || snapshot.data!.isEmpty) {
       if (nothingFound != null) return nothingFound;
       return const Center(
         child: Text('No Data Found'),
