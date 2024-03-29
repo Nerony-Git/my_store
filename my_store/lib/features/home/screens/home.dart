@@ -82,7 +82,14 @@ class HomeScreen extends StatelessWidget {
                   /// Popular Products Section
                   SectionHeading(
                     title: 'Popular Products',
-                    onPressed: () => Get.to(() => const AllProductsScreen()),
+                    onPressed: () => Get.to(() => AllProductsScreen(
+                          title: 'Popular Products',
+                          // Using query
+                          // query: FirebaseFirestore.instance.collection('Products').where('IsFeatured', isEqualTo: true).limit(6),
+
+                          // Using a future method
+                          futureMethod: controller.fetchAllFeaturedProducts(),
+                        )),
                   ),
                   const SizedBox(
                     height: MySizes.spaceBtwItems,
