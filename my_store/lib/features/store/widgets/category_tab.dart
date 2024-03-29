@@ -2,17 +2,14 @@ import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:my_store/features/store/controllers/category_controller.dart';
 import 'package:my_store/features/store/screens/all_products.dart';
-import 'package:my_store/features/store/widgets/brand_showcase.dart';
 import 'package:my_store/features/store/widgets/category_brands.dart';
 import 'package:my_store/global/widgets/layouts/grid_layout.dart';
 import 'package:my_store/global/widgets/product/product_card_vertical.dart';
 import 'package:my_store/global/widgets/section_heading.dart';
 import 'package:my_store/global/widgets/shimmers/vertical_product_shimmer.dart';
-import 'package:my_store/utils/constants/images.dart';
 import 'package:my_store/utils/constants/sizes.dart';
 import 'package:my_store/utils/helpers/cloud_functions.dart';
 import 'package:my_store/utils/models/category_model.dart';
-import 'package:my_store/utils/models/product_model.dart';
 
 class CategoryTab extends StatelessWidget {
   const CategoryTab({super.key, required this.category});
