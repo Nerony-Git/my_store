@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:iconsax/iconsax.dart';
 import 'package:my_store/global/widgets/containers/rounded_container.dart';
-import 'package:my_store/global/widgets/icons/rounded_icon.dart';
+import 'package:my_store/global/widgets/icons/wishlist_icon.dart';
 import 'package:my_store/global/widgets/imgs/rounded_image.dart';
 import 'package:my_store/global/widgets/product/brand_title_with_icon.dart';
 import 'package:my_store/global/widgets/product/product_price.dart';
@@ -65,9 +65,8 @@ class ProductCardHorizontal extends StatelessWidget {
                 const Positioned(
                   top: 0,
                   right: 0,
-                  child: RoundedIcon(
-                    icon: Iconsax.heart5,
-                    color: Colors.red,
+                  child: WishlistIcon(
+                    productID: '',
                   ),
                 ),
               ],
