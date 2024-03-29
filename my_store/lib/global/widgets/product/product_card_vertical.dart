@@ -5,7 +5,7 @@ import 'package:my_store/features/product/controllers/product_controller.dart';
 import 'package:my_store/features/product/screens/product_detail.dart';
 import 'package:my_store/global/styles/shadow_styles.dart';
 import 'package:my_store/global/widgets/containers/rounded_container.dart';
-import 'package:my_store/global/widgets/icons/rounded_icon.dart';
+import 'package:my_store/global/widgets/icons/wishlist_icon.dart';
 import 'package:my_store/global/widgets/product/brand_title_with_icon.dart';
 import 'package:my_store/global/widgets/product/product_price.dart';
 import 'package:my_store/global/widgets/product/product_title.dart';
@@ -77,12 +77,11 @@ class ProductCardVertical extends StatelessWidget {
                     ),
 
                   /// WishList
-                  const Positioned(
+                  Positioned(
                     top: 0,
                     right: 0,
-                    child: RoundedIcon(
-                      icon: Iconsax.heart5,
-                      color: Colors.red,
+                    child: WishlistIcon(
+                      productID: product.id,
                     ),
                   ),
                 ],
