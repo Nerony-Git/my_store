@@ -8,7 +8,10 @@ import 'package:my_store/global/widgets/section_heading.dart';
 import 'package:my_store/utils/constants/sizes.dart';
 import 'package:my_store/utils/controllers/upload_data_controller.dart';
 import 'package:my_store/utils/models/banner_model.dart';
+import 'package:my_store/utils/models/brand_category_model.dart';
 import 'package:my_store/utils/models/brand_model.dart';
+import 'package:my_store/utils/models/category_model.dart';
+import 'package:my_store/utils/models/product_category_model.dart';
 import 'package:my_store/utils/models/product_model.dart';
 
 class UploadDataScreen extends StatelessWidget {
@@ -20,6 +23,9 @@ class UploadDataScreen extends StatelessWidget {
     List<BannerModel> banners = DummyData.banners;
     List<ProductModel> products = DummyData.products;
     List<BrandModel> brands = DummyData.brands;
+    List<CategoryModel> categories = DummyData.categories;
+    List<BrandCategoryModel> brandCategories = DummyData.brandCategory;
+    List<ProductCategoryModel> productCategories = DummyData.productCategories;
 
     return Scaffold(
       appBar: const CustomAppBar(
@@ -43,7 +49,7 @@ class UploadDataScreen extends StatelessWidget {
               UploadDataTile(
                 icon: Iconsax.category,
                 title: 'Upload Categories',
-                onTap: () {},
+                onTap: () => controller.uploadCategories(categories),
               ),
               const SizedBox(
                 height: MySizes.spaceBtwItems,
@@ -88,7 +94,7 @@ class UploadDataScreen extends StatelessWidget {
               UploadDataTile(
                 icon: Iconsax.link,
                 title: 'Upload Brands & Categories Relation Data',
-                onTap: () {},
+                onTap: () => controller.uploadBrandCategory(brandCategories),
               ),
               const SizedBox(
                 height: MySizes.spaceBtwItems,
@@ -97,7 +103,8 @@ class UploadDataScreen extends StatelessWidget {
               UploadDataTile(
                 icon: Iconsax.link,
                 title: 'Upload Product Categories Relational Data',
-                onTap: () {},
+                onTap: () =>
+                    controller.uploadProductCategory(productCategories),
               ),
             ],
           ),
