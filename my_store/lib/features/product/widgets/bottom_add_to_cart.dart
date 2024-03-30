@@ -1,15 +1,22 @@
 import 'package:flutter/material.dart';
+import 'package:get/get.dart';
 import 'package:iconsax/iconsax.dart';
+import 'package:my_store/features/store/controllers/cart_controller.dart';
 import 'package:my_store/global/widgets/icons/rounded_icon.dart';
 import 'package:my_store/utils/constants/colors.dart';
 import 'package:my_store/utils/constants/sizes.dart';
 import 'package:my_store/utils/helpers/helper_functions.dart';
+import 'package:my_store/utils/models/product_model.dart';
 
 class BottomAddToCart extends StatelessWidget {
-  const BottomAddToCart({super.key});
+  const BottomAddToCart({super.key, required this.product});
+
+  final ProductModel product;
 
   @override
   Widget build(BuildContext context) {
+    final controller = CartController.instance;
+    controller.updateProductCount(product);
     final dark = HelperFunctions.isDarkMode(context);
 
     return Container(
@@ -22,47 +29,62 @@ class BottomAddToCart extends StatelessWidget {
           topRight: Radius.circular(MySizes.cardRadiusLg),
         ),
       ),
-      child: Row(
-        mainAxisAlignment: MainAxisAlignment.spaceBetween,
-        children: [
-          Row(
-            children: [
-              const RoundedIcon(
-                icon: Iconsax.minus,
-                backgroundColor: MyColors.darkGrey,
-                width: 40,
-                height: 40,
-                color: MyColors.white,
-              ),
-              const SizedBox(
-                width: MySizes.spaceBtwItems,
-              ),
-              Text(
-                '2',
-                style: Theme.of(context).textTheme.titleSmall,
-              ),
-              const SizedBox(
-                width: MySizes.spaceBtwItems,
-              ),
-              const RoundedIcon(
-                icon: Iconsax.add,
-                backgroundColor: MyColors.darkGrey,
-                width: 40,
-                height: 40,
-                color: MyColors.white,
-              ),
-            ],
-          ),
-          ElevatedButton(
-            onPressed: () {},
-            style: ElevatedButton.styleFrom(
-              padding: const EdgeInsets.all(MySizes.md),
-              backgroundColor: MyColors.black,
-              side: const BorderSide(color: MyColors.black),
+      child: Obx(
+        () => Row(
+          mainAxisAlignment: MainAxisAlignment.spaceBetween,
+          children: [
+            Row(
+              children: [
+                RoundedIcon(
+                  icon: Iconsax.minus,
+                  backgroundColor: MyColors.darkGrey,
+                  width: 40,
+                  height: 40,
+                  color: MyColors.white,
+                  onPressed: () => controller.productQuantityInCart.value < 1
+                      ? null
+                      : controller.productQuantityInCart.value -= 1,
+                ),
+                const SizedBox(
+                  width: MySizes.spaceBtwItems,
+                ),
+                Text(
+                  controller.productQuantityInCart.value.toString(),
+                  style: Theme.of(context).textTheme.titleSmall,
+                ),
+                const SizedBox(
+                  width: MySizes.spaceBtwItems,
+                ),
+                RoundedIcon(
+                  icon: Iconsax.add,
+                  backgroundColor: MyColors.primary,
+                  width: 40,
+                  height: 40,
+                  color: MyColors.white,
+                  onPressed: () => controller.productQuantityInCart.value += 1,
+                ),
+              ],
             ),
-            child: const Text('Add to Cart'),
-          ),
-        ],
+            ElevatedButton(
+              onPressed: controller.productQuantityInCart.value < 1
+                  ? null
+                  : () => controller.addToCart(product),
+              style: ElevatedButton.styleFrom(
+                padding: const EdgeInsets.all(MySizes.md),
+                backgroundColor: MyColors.primary,
+                side: const BorderSide(color: MyColors.primary),
+              ),
+              child: Text(
+                'Add to Cart',
+                style: TextStyle(
+                  color: controller.productQuantityInCart.value < 1
+                      ? Colors.grey[600]
+                      : MyColors.white,
+                ),
+              ),
+            ),
+          ],
+        ),
       ),
     );
   }
