@@ -1,4 +1,5 @@
 import 'package:get/get.dart';
+import 'package:my_store/features/product/controllers/variation_controller.dart';
 import 'package:my_store/utils/helpers/network_manager.dart';
 
 class GeneralBindings extends Bindings {
@@ -6,5 +7,6 @@ class GeneralBindings extends Bindings {
   void dependencies() {
     /// Implement dependencies
     Get.put(NetworkManager());
+    Get.put(VariationController());
   }
 }
