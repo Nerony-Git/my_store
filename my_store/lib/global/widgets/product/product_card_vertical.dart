@@ -1,11 +1,11 @@
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
-import 'package:iconsax/iconsax.dart';
 import 'package:my_store/features/product/controllers/product_controller.dart';
 import 'package:my_store/features/product/screens/product_detail.dart';
 import 'package:my_store/global/styles/shadow_styles.dart';
 import 'package:my_store/global/widgets/containers/rounded_container.dart';
 import 'package:my_store/global/widgets/icons/wishlist_icon.dart';
+import 'package:my_store/global/widgets/product/add_to_cart_button.dart';
 import 'package:my_store/global/widgets/product/brand_title_with_icon.dart';
 import 'package:my_store/global/widgets/product/product_price.dart';
 import 'package:my_store/global/widgets/product/product_title.dart';
@@ -128,7 +128,7 @@ class ProductCardVertical extends StatelessWidget {
                         Padding(
                           padding: const EdgeInsets.only(left: MySizes.sm),
                           child: Text(
-                            '£${product.price.toString()}',
+                            '£${product.price.toStringAsFixed(2)}',
                             style: Theme.of(context)
                                 .textTheme
                                 .labelMedium!
@@ -148,25 +148,7 @@ class ProductCardVertical extends StatelessWidget {
                 ),
 
                 /// Add to cart button
-                Container(
-                  decoration: const BoxDecoration(
-                    color: MyColors.dark,
-                    borderRadius: BorderRadius.only(
-                      topLeft: Radius.circular(MySizes.cardRadiusMd),
-                      bottomRight: Radius.circular(MySizes.productImageRadius),
-                    ),
-                  ),
-                  child: const SizedBox(
-                    width: MySizes.iconLg * 1.2,
-                    height: MySizes.iconLg * 1.2,
-                    child: Center(
-                      child: Icon(
-                        Iconsax.add,
-                        color: MyColors.white,
-                      ),
-                    ),
-                  ),
-                ),
+                AddToCartButton(product: product),
               ],
             ),
           ],
