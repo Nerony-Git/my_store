@@ -1,7 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:iconsax/iconsax.dart';
-import 'package:my_store/features/home/screens/home.dart';
 import 'package:my_store/features/navigation/widgets/navigation_menu.dart';
 import 'package:my_store/features/store/controllers/wishlist_controller.dart';
 import 'package:my_store/global/widgets/custom_app_bar.dart';
@@ -30,7 +29,7 @@ class WishlistScreen extends StatelessWidget {
         actions: [
           RoundedIcon(
             icon: Iconsax.add,
-            onPressed: () => Get.to(const HomeScreen()),
+            onPressed: () => Get.off(() => const NavigationMenu()),
           ),
         ],
       ),
@@ -49,7 +48,8 @@ class WishlistScreen extends StatelessWidget {
                         animation: MyImages.pencilAnimation,
                         showAction: true,
                         actionText: 'Let\'s add some',
-                        onActionPressed: () => Get.to(const NavigationMenu()),
+                        onActionPressed: () =>
+                            Get.off(() => const NavigationMenu()),
                       );
 
                       /// Handle loader, no record, or error message
