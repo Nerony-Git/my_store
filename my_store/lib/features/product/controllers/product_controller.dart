@@ -67,7 +67,7 @@ class ProductController extends GetxController {
     if (product.productType == ProductType.single.toString()) {
       // Check if product has sale price
       return (product.salePrice > 0 ? product.salePrice : product.price)
-          .toString();
+          .toStringAsFixed(2);
     } else {
       // If product has variations, calculate the average price
       for (var variation in product.productVariations!) {
@@ -87,10 +87,10 @@ class ProductController extends GetxController {
 
       // If minimum and maximum prices are the same, return a single price
       if (minPrice.isEqual(maxPrice)) {
-        return maxPrice.toString();
+        return maxPrice.toStringAsFixed(2);
       } else {
         // Otherwise, return a price range
-        return '$minPrice - £$maxPrice';
+        return '${minPrice.toStringAsFixed(2)} - £${maxPrice.toStringAsFixed(2)}';
       }
     }
   }
