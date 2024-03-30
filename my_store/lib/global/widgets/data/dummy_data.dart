@@ -1,4 +1,5 @@
 import 'package:my_store/utils/constants/images.dart';
+import 'package:my_store/utils/models/address_model.dart';
 import 'package:my_store/utils/models/banner_model.dart';
 import 'package:my_store/utils/models/brand_category_model.dart';
 import 'package:my_store/utils/models/brand_model.dart';
@@ -41,34 +42,35 @@ class DummyData {
 
   // /// User
   // static final UserModel user = UserModel(
-  //     firstName: 'John',
-  //     lastName: 'Doe',
-  //     username: 'username',
-  //     email: 'bughuntedbykwaku@gmail.com',
-  //     phoneNumber: '03749274992',
-  //     profilePicture: MyImages.user,
-  //     address: [
-  //       AddressModel(
-  //         id: '1',
-  //         name: 'John Doe',
-  //         phoneNumber: '03749274992',
-  //         street: 'Hill Avenue',
-  //         city: 'Watford',
-  //         county: 'Hertfordshire',
-  //         postalCode: 'WD24 3YS',
-  //         country: 'UK',
-  //       ),
-  //       AddressModel(
-  //         id: '1',
-  //         name: 'John Doe',
-  //         phoneNumber: '03749274992',
-  //         street: 'Hill Avenue',
-  //         city: 'Watford',
-  //         county: 'Hertfordshire',
-  //         postalCode: 'WD24 3YS',
-  //         country: 'UK',
-  //       ),
-  //     ]);
+  //   firstName: 'John',
+  //   lastName: 'Doe',
+  //   username: 'username',
+  //   email: 'bughuntedbykwaku@gmail.com',
+  //   phoneNumber: '03749274992',
+  //   profilePicture: MyImages.user,
+  //   address: [
+  //     AddressModel(
+  //       id: '1',
+  //       name: 'John Doe',
+  //       phoneNumber: '03749274992',
+  //       street: 'Hill Avenue',
+  //       city: 'Watford',
+  //       county: 'Hertfordshire',
+  //       postalCode: 'WD24 3YS',
+  //       country: 'UK',
+  //     ),
+  //     AddressModel(
+  //       id: '1',
+  //       name: 'John Doe',
+  //       phoneNumber: '03749274992',
+  //       street: 'Hill Avenue',
+  //       city: 'Watford',
+  //       county: 'Hertfordshire',
+  //       postalCode: 'WD24 3YS',
+  //       country: 'UK',
+  //     ),
+  //   ],
+  // );
 
   // /// Cart
   // static final CartModel cart = CartModel(
