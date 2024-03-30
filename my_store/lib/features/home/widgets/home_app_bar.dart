@@ -30,7 +30,10 @@ class HomeAppBar extends StatelessWidget {
           Obx(() {
             if (controller.profileLoading.value) {
               // Display a shimmer while user profile is loading
-              return const ShimmerEffect(width: 80, height: 15,);
+              return const ShimmerEffect(
+                width: 80,
+                height: 15,
+              );
             } else {
               return Text(
                 controller.user.value.fullName,
@@ -40,15 +43,12 @@ class HomeAppBar extends StatelessWidget {
                     .apply(color: MyColors.white),
               );
             }
-          }
-          ),
+          }),
         ],
       ),
-      actions: [
+      actions: const [
         CartIcon(
-          onPressed: () {},
           iconColor: MyColors.white,
-          
         ),
       ],
     );
